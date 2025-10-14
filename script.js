@@ -489,7 +489,7 @@ if (
 
 
 function startTimer() {
-  timeLeft = 15;
+  timeLeft = 30;
   timerEl.textContent = `Time left: ${timeLeft}s`;
 
   const wrapper = document.querySelector(".effect-wrapper");
@@ -504,7 +504,7 @@ function startTimer() {
     timerEl.textContent = `Time left: ${timeLeft}s`;
 
     // ✅ Zoom in gradually
-    const scale = 1 + (30 - timeLeft) * 0.03;
+    const scale = 1 + (30 - timeLeft) * 0.02;
     wrapper.style.setProperty("--zoom", scale.toFixed(2));
     wrapper.style.transform = `scale(${scale.toFixed(2)})`;
 
@@ -669,5 +669,6 @@ nextBtn.onclick = () => {
     showResult();
   }
 };
+
 
 
