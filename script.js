@@ -394,7 +394,7 @@ const selectedQuestions = questionPool.sort(() => 0.5 - Math.random()).slice(0, 
 let current = 0;
 let score = 0;
 let timer;
-let timeLeft = 15;
+let timeLeft = 30;
 
 const questionEl = document.getElementById("question");
 const optionsEl = document.getElementById("options");
@@ -504,7 +504,7 @@ function startTimer() {
     timerEl.textContent = `Time left: ${timeLeft}s`;
 
     // ✅ Zoom in gradually
-    const scale = 1 + (15 - timeLeft) * 0.02;
+    const scale = 1 + (30 - timeLeft) * 0.03;
     wrapper.style.setProperty("--zoom", scale.toFixed(2));
     wrapper.style.transform = `scale(${scale.toFixed(2)})`;
 
@@ -603,6 +603,9 @@ skipBtn.onclick = () => {
 
 
 function showAnswer(selectedIndex) {
+          // ✅ Stop shaking
+      wrapper.classList.remove("shake");
+
   const q = selectedQuestions[current];
   const items = optionsEl.querySelectorAll("li");
 
