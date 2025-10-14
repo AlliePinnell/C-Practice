@@ -538,6 +538,10 @@ startBtn.onclick = () => {
     name = "Remy (Pool master)";
   }
 
+      if (lowerName === "cole") {
+    name = "My Friend Cole";
+  }
+
   if (lowerName === "jamari" || lowerName === "bread and jam" || lowerName === "breadnjam") {
   name = "You should know your own name...";
 }
