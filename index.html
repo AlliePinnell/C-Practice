@@ -7,12 +7,25 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div id="copilot-brand">
+  <img src="copilot-logo.png" alt="Copilot Logo" />
+</div>
+
   <!-- ✅ Start screen for name input -->
   <div id="start-screen">
     <div class="container">
       <h2>Welcome to the C++ Quiz Challenge</h2>
       <label for="player-name">Enter your name:</label>
       <input type="text" id="player-name" />
+      <label for="question-count">How many questions?</label>
+      <select id="question-count">
+        <option value="20">20</option>
+        <option value="40">40</option>
+        <option value="60">60</option>
+        <option value="80">80</option>
+        <option value="100">100</option>
+      </select>
+
       <button id="start-btn">Start Quiz</button>
     </div>
   </div>
@@ -27,6 +40,7 @@
       <div id="timer"></div>
 
       <div id="quiz-box">
+        <div id="question-number" class="question-number"></div>
         <div id="question"></div>
         <ul id="options"></ul>
         <button id="next-btn">Next</button>

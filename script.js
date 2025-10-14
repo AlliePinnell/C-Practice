@@ -1,6 +1,10 @@
 let questionsCompleted = 0;
 let currentShuffledOptions = [];
 
+const questionCountSelect = document.getElementById("question-count");
+let totalQuestions = 20; // default
+const questionNumberEl = document.getElementById("question-number");
+
 
 const questionPool = [
     {
@@ -390,7 +394,7 @@ const followUpMessages = [
 ];
 
 
-const selectedQuestions = questionPool.sort(() => 0.5 - Math.random()).slice(0, 20);
+let selectedQuestions = [];
 let current = 0;
 let score = 0;
 let timer;
@@ -481,6 +485,10 @@ if (
   startScreen.classList.add("hidden");
   quizBox.classList.remove("hidden");
 
+  totalQuestions = parseInt(questionCountSelect.value);
+  selectedQuestions = questionPool.sort(() => 0.5 - Math.random()).slice(0, totalQuestions);
+
+
   showQuestion();
 };
 
@@ -552,6 +560,7 @@ nextBtn.onclick = () => {
 function showQuestion() {
   const q = selectedQuestions[current];
   questionEl.textContent = `Q${current + 1}: ${q.question}`;
+  questionNumberEl.textContent = `Question ${current + 1} / ${totalQuestions}`;
   optionsEl.innerHTML = "";
   nextBtn.style.display = "none";
 

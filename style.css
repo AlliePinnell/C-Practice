@@ -1,4 +1,7 @@
 /* Base layout */
+html {
+  font-family: 'Segoe UI', sans-serif;
+}
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -205,5 +208,33 @@ button:hover {
   text-align: center;
 }
 
+#question-count {
+  margin-top: 8px;
+  padding: 6px;
+  font-size: 1rem;
+}
 
+.question-number {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: red;
+  text-align: center;
+}
 
+#copilot-brand {
+  position: absolute;
+  top: 10px;
+  left: 25px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.2rem;
+  font-weight: normal;
+  color: white;
+  z-index: -1000;
+}
+
+#copilot-brand img {
+  width: 15%;
+  height: 100%;
+}
