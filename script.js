@@ -1,4 +1,6 @@
 
+const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
 let questionsCompleted = 0;
 let currentShuffledOptions = [];
 
@@ -194,7 +196,7 @@ const questionPool = [
         answer: 1
     },
     {
-        question: "[Chapter 4] Which loop structure is best for repeating until a user enters 'n'?",
+        question: "[Chapter 4] Which loop structure is best when you want to prompt the user at least once and keep repeating until they enter 'n'?",
         options: ["for loop", "while loop", "do-while loop", "switch statement"],
         answer: 2
     },
@@ -590,9 +592,11 @@ function startTimer() {
   const wrapper = document.querySelector(".effect-wrapper");
   const banner = document.getElementById("times-up-banner");
 
+if (!isMobile) {
   wrapper.style.transform = "scale(1)";
   wrapper.classList.remove("shake");
   banner.classList.add("hidden");
+}
 
   timer = setInterval(() => {
     timeLeft--;
@@ -633,8 +637,10 @@ nextBtn.onclick = () => {
 
   // ✅ Reset zoom, shake, and banner
   const wrapper = document.querySelector(".effect-wrapper");
+if (!isMobile) {
   wrapper.style.transform = "scale(1)";
-  document.getElementById("times-up-banner").classList.add("hidden");
+}
+document.getElementById("times-up-banner").classList.add("hidden");
 
   if (current < selectedQuestions.length) {
     showQuestion();
