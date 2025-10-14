@@ -1,3 +1,4 @@
+
 let questionsCompleted = 0;
 let currentShuffledOptions = [];
 
@@ -356,6 +357,81 @@ const questionPool = [
         question: "[Chapter 6] What is the output?\n\nvector<int> scores = {99, 87, 91};\ncout << scores.at(1);",
         options: ["99", "87", "91", "Error"],
         answer: 1
+    },
+        {
+        question: "[Chapter 3] What is the output?\n\nint x = 5;\nint y = 10;\ncout << (x > y ? x : y);",
+        options: ["5", "10", "true", "false"],
+        answer: 1
+    },
+    {
+        question: "[Chapter 3] What is the output?\n\nint age = 17;\ncout << (age >= 18 ? \"Adult\" : \"Minor\");",
+        options: ["Adult", "Minor", "True", "False"],
+        answer: 1
+    },
+    {
+        question: "[Chapter 3] What is the output?\n\nint score = 92;\ncout << (score >= 90 ? \"A\" : \"B\");",
+        options: ["A", "B", "C", "92"],
+        answer: 0
+    },
+    {
+        question: "[Chapter 3] What is the output?\n\nint temp = 32;\ncout << (temp < 0 ? \"Freezing\" : \"Above freezing\");",
+        options: ["Freezing", "Above freezing", "0", "32"],
+        answer: 1
+    },
+    {
+        question: "[Chapter 3] What is the output?\n\nint num = 0;\ncout << (num != 0 ? \"Non-zero\" : \"Zero\");",
+        options: ["Zero", "Non-zero", "True", "False"],
+        answer: 0
+    },
+    {
+        question: "[Chapter 3] What is the output?\n\nint x = 3;\nint y = 7;\ncout << (x == y ? \"Equal\" : \"Not equal\");",
+        options: ["Equal", "Not equal", "True", "False"],
+        answer: 1
+    },
+    {
+        question: "[Chapter 3] What is the output?\n\nint discount = 0;\nint subtotal = 120;\ndiscount = (subtotal >= 100 ? 10 : 5);\ncout << discount;",
+        options: ["5", "10", "100", "0"],
+        answer: 1
+    },
+    {
+        question: "[Chapter 3] What is the output?\n\nint x = 4;\ncout << (x % 2 == 0 ? \"Even\" : \"Odd\");",
+        options: ["Even", "Odd", "True", "False"],
+        answer: 0
+    },
+    {
+        question: "[Chapter 3] What is the output?\n\nint score = 75;\ncout << (score >= 60 ? \"Pass\" : \"Fail\");",
+        options: ["Pass", "Fail", "True", "False"],
+        answer: 0
+    },
+    {
+        question: "[Chapter 3] What is the output?\n\nint x = 1;\ncout << (x ? \"True\" : \"False\");",
+        options: ["True", "False", "1", "0"],
+        answer: 0
+    },
+    {
+        question: "[Chapter 3] What is the output?\n\nint a = 3;\nint b = 3;\ncout << (a != b ? \"Mismatch\" : \"Match\");",
+        options: ["Mismatch", "Match", "True", "False"],
+        answer: 1
+    },
+    {
+        question: "[Chapter 3] What is the output?\n\nint x = -1;\ncout << (x >= 0 ? \"Positive\" : \"Negative\");",
+        options: ["Positive", "Negative", "Zero", "Error"],
+        answer: 1
+    },
+    {
+        question: "[Chapter 3] What is the output?\n\nint x = 0;\ncout << (x == 0 ? \"Zero\" : \"Non-zero\");",
+        options: ["Zero", "Non-zero", "True", "False"],
+        answer: 0
+    },
+    {
+        question: "[Chapter 3] What is the output?\n\nint x = 7;\ncout << (x % 2 == 1 ? \"Odd\" : \"Even\");",
+        options: ["Odd", "Even", "True", "False"],
+        answer: 0
+    },
+    {
+        question: "[Chapter 3] What is the output?\n\nint x = 100;\ncout << (x >= 100 ? \"Max\" : \"Below Max\");",
+        options: ["Max", "Below Max", "100", "Error"],
+        answer: 0
     }
 ];
 
@@ -412,6 +488,13 @@ const startBtn = document.getElementById("start-btn");
 const playerInput = document.getElementById("player-name");
 const playerDisplay = document.getElementById("player-display");
 const quizBox = document.querySelector(".effect-wrapper");
+
+const liveNameSpan = document.getElementById("live-name");
+
+playerInput.addEventListener("input", () => {
+  const name = playerInput.value.trim();
+  liveNameSpan.textContent = name ? `, ${name}` : "";
+});
 
 let playerName = "";
 
