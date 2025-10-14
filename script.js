@@ -603,9 +603,6 @@ skipBtn.onclick = () => {
 
 
 function showAnswer(selectedIndex) {
-          // ✅ Stop shaking
-      wrapper.classList.remove("shake");
-
   const q = selectedQuestions[current];
   const items = optionsEl.querySelectorAll("li");
 
@@ -647,6 +644,9 @@ if (q.options[q.answer] === selectedText) {
   const randomMessage = followUpMessages[Math.floor(Math.random() * followUpMessages.length)];
   followUpBox.innerHTML = `<p>${randomMessage}</p>`;
   followUpBox.classList.remove("hidden");
+
+              // ✅ Stop shaking
+      wrapper.classList.remove("shake");
 }
 
 
@@ -669,6 +669,7 @@ nextBtn.onclick = () => {
     showResult();
   }
 };
+
 
 
 
