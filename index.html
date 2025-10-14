@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>C++ Quiz Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ✅ Start screen for name input -->
+  <div id="start-screen">
+    <div class="container">
+      <h2>Welcome to the C++ Quiz Challenge</h2>
+      <label for="player-name">Enter your name:</label>
+      <input type="text" id="player-name" />
+      <button id="start-btn">Start Quiz</button>
+    </div>
+  </div>
+
+  <!-- ✅ Renamed wrapper for zoom/shake/time's up effects -->
+  <div id="times-up-banner" class="hidden">Time’s up!</div>
+
+  <div class="effect-wrapper hidden">
+    <div class="container">
+      <h1>C++ Quiz Challenge</h1>
+      <p id="player-display" class="hidden"></p>
+      <div id="timer"></div>
+
+      <div id="quiz-box">
+        <div id="question"></div>
+        <ul id="options"></ul>
+        <button id="next-btn">Next</button>
+        <button id="skip-btn">Skip</button>
+        <button id="end-btn">End Quiz</button>
+
+        <!-- ✅ Copilot-style follow-up box -->
+        <div id="follow-up-box" class="hidden">
+          <p>Would you like me to generate another question for you?</p>
+        </div>
+      </div>
+
+      <div id="result-box" class="hidden">
+        <h2>Your Score:</h2>
+        <p id="score"></p>
+        <button onclick="location.reload()">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
