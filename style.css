@@ -238,3 +238,70 @@ button:hover {
   width: 15%;
   height: 100%;
 }
+
+@media (max-width: 768px) {
+  .shake {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+#start-screen .container {
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+#start-screen h2 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+}
+
+#start-screen label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+#start-screen input[type="text"],
+#start-screen select {
+  width: 60%;
+  padding: 10px;
+  font-size: 1rem;
+
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+#start-screen button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#start-screen button:hover {
+  background-color: #357bd8;
+}
+
+#start-screen input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+#start-screen label[for="basic-mode-toggle"] {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #555;
+}

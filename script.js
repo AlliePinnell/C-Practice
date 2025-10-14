@@ -1,5 +1,5 @@
-
-const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+const basicModeToggle = document.getElementById("basic-mode-toggle");
+let basicMode = false;
 
 let questionsCompleted = 0;
 let currentShuffledOptions = [];
@@ -469,6 +469,26 @@ const followUpMessages = [
     "Turkeys have unique personalities, just like dogs and cats. Some are social, and some are loners. People who live with turkeys in animal sanctuaries report that they even have varying tastes in music.",
     "Did you know? A group of flamingos is called a 'flamboyance'.",
     "Did you know? I'm failing this midterm!",
+    "Did you know? C++ supports both procedural and object-oriented programming paradigms.",
+    "Did you know? Applebee's serves a dsert called 'The Perfectly Imperfect Cheesecake'.",
+    "Did you know? As an AI model, I don't have personal experiences or feelings, but I'm here to help you!",
+    "Did you know? The longest recorded flight of a chicken is 13 seconds.",
+    "Did you know? The shortest war in history was between Britain and Zanzibar on August 27, 1896. Zanzibar surrendered after 38 minutes.",
+    "Did you know? Did you know! Did you know... Did you know?",
+    "Did you know? Sonic the Hedgehog was originally named 'Mr. Needlemouse'.",
+    "Did you know? Sonic's original design was created by artist Naoto Ohshima, who based the character on a combination of a hedgehog and a human.",
+    "Did you know? Sonic's iconic red shoes were inspired by Michael Jackson's boots from the 'Bad' album cover.",
+    "Did you know? Sonic's sidekick, Tails, was named after his two tails that allow him to fly.",
+    "Did you know? Sonic's design has undergone several changes over the years, with the most notable redesign occurring in 1998 for the game 'Sonic Adventure'.",
+    "Did you know? Sonic's popularity has led to a dedicated fanbase and numerous fan-made games and content.",
+    "Did you know? Sonic's catchphrase is 'Gotta go fast!'",
+    "Did you know? Sonic's favorite food is chili dogs.",
+    "Did you know? Sonic is fast because of his shoes, just ask Emma!",
+    "Did you know? Sonic is fast because of his shoes, just ask Emma!",
+    "Did you know? Sonic is fast because of his shoes, just ask Emma!",
+    "Did you know? Sonic is fast because of his shoes, just ask Emma!",
+    "Did you know? Sonic is fast because of his shoes, just ask Emma!",
+    "Did you know? Sonic is fast because of his shoes, just ask Emma!",
 ];
 
 
@@ -576,7 +596,7 @@ if (
 
   totalQuestions = parseInt(questionCountSelect.value);
   selectedQuestions = questionPool.sort(() => 0.5 - Math.random()).slice(0, totalQuestions);
-
+    basicMode = basicModeToggle.checked;
 
   showQuestion();
 };
@@ -592,25 +612,23 @@ function startTimer() {
   const wrapper = document.querySelector(".effect-wrapper");
   const banner = document.getElementById("times-up-banner");
 
-if (!isMobile) {
   wrapper.style.transform = "scale(1)";
   wrapper.classList.remove("shake");
   banner.classList.add("hidden");
-}
 
   timer = setInterval(() => {
     timeLeft--;
     timerEl.textContent = `Time left: ${timeLeft}s`;
 
-    // ✅ Zoom in gradually
-    const scale = 1 + (30 - timeLeft) * 0.02;
-    wrapper.style.setProperty("--zoom", scale.toFixed(2));
-    wrapper.style.transform = `scale(${scale.toFixed(2)})`;
+if (!basicMode) {
+  const scale = 1 + (30 - timeLeft) * 0.02;
+  wrapper.style.setProperty("--zoom", scale.toFixed(2));
+  wrapper.style.transform = `scale(${scale.toFixed(2)})`;
 
-    // ✅ Start shaking at 6 seconds
-    if (timeLeft === 6) {
-      wrapper.classList.add("shake");
-    }
+  if (timeLeft === 6) {
+    wrapper.classList.add("shake");
+  }
+}
 
     // ✅ Time's up
     if (timeLeft <= 0) {
@@ -637,10 +655,8 @@ nextBtn.onclick = () => {
 
   // ✅ Reset zoom, shake, and banner
   const wrapper = document.querySelector(".effect-wrapper");
-if (!isMobile) {
   wrapper.style.transform = "scale(1)";
-}
-document.getElementById("times-up-banner").classList.add("hidden");
+  document.getElementById("times-up-banner").classList.add("hidden");
 
   if (current < selectedQuestions.length) {
     showQuestion();
@@ -710,7 +726,10 @@ function showAnswer(selectedIndex) {
 
   // ✅ Reset zoom scale immediately
   const wrapper = document.querySelector(".effect-wrapper");
+if (!basicMode) {
   wrapper.style.transform = "scale(1)";
+  wrapper.classList.remove("shake");
+}
 
   // ✅ Reveal answers one by one
   items.forEach((li, i) => {
@@ -746,9 +765,6 @@ if (q.options[q.answer] === selectedText) {
   const randomMessage = followUpMessages[Math.floor(Math.random() * followUpMessages.length)];
   followUpBox.innerHTML = `<p>${randomMessage}</p>`;
   followUpBox.classList.remove("hidden");
-
-              // ✅ Stop shaking
-      wrapper.classList.remove("shake");
 }
 
 
