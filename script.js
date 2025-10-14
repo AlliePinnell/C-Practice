@@ -457,7 +457,7 @@ startBtn.onclick = () => {
 
 // ✅ Blocked names: Blanc, Saeed, Sergio, Sultan
 if (
-  ["blanc", "saeed", "sergio", "sultan", "mccully", "rich", "fuck you", "bitch", "alyssa sucks", "allie sucks"].includes(lowerName)
+  ["blanc", "saeed", "sergio", "sultan", "mccully", "fuck you", "bitch", "alyssa sucks", "allie sucks"].includes(lowerName)
 ) {
   alert("Access denied.");
   window.close(); // May not work in all browsers unless opened via script
@@ -669,6 +669,7 @@ nextBtn.onclick = () => {
     showResult();
   }
 };
+
 
 
 
