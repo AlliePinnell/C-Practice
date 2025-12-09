@@ -8,434 +8,760 @@ const questionCountSelect = document.getElementById("question-count");
 let totalQuestions = 20; // default
 const questionNumberEl = document.getElementById("question-number");
 
+// Theme Switching
+const themeSelect = document.getElementById("theme-select");
+
+function applyTheme(themeName) {
+  document.body.classList.remove("theme-default", "theme-demonic", "theme-maziar");
+
+  if (themeName === "demonic") {
+    document.body.classList.add("theme-demonic");
+  } else if (themeName === "maziar") {
+    document.body.classList.add("theme-maziar");
+  } else {
+    document.body.classList.add("theme-default");
+  }
+}
+
+// Live theme switching on menu
+themeSelect.addEventListener("change", () => {
+  applyTheme(themeSelect.value);
+});
+
+// Default theme on load
+themeSelect.addEventListener("change", () => {
+  applyTheme(themeSelect.value);
+});
+
+const sparkleLayer = document.getElementById("sparkle-layer");
+
+function createSparkles() {
+  for (let i = 0; i < 100; i++) {
+    const s = document.createElement("div");
+    s.classList.add("sparkle");
+
+    s.style.left = Math.random() * 100 + "%";
+    s.style.top = Math.random() * 100 + "%";
+
+    s.style.animationDuration = 4 + Math.random() * 6 + "s";
+
+    sparkleLayer.appendChild(s);
+  }
+}
+
+createSparkles();
+
+const fireLayer = document.getElementById("fire-layer");
+
+// Generate 50 flames
+for (let i = 0; i < 50; i++) {
+  const flame = document.createElement("div");
+  flame.classList.add("fire");
+  flame.style.left = Math.random() * 100 + "%";
+  flame.style.width = 10 + Math.random() * 20 + "px";
+  flame.style.height = 50 + Math.random() * 120 + "px";
+  flame.style.animationDuration = 0.8 + Math.random() * 1.5 + "s";
+  flame.style.background = `linear-gradient(to top,
+    #${Math.floor(255).toString(16)}${Math.floor(204).toString(16)}00,
+    #ff${Math.floor(102 + Math.random()*153).toString(16)}00,
+    #${Math.floor(255).toString(16)}0000,
+    #990000)`;
+  fireLayer.appendChild(flame);
+}
+
+// Generate 30 smoke wisps
+for (let i = 0; i < 30; i++) {
+  const smoke = document.createElement("div");
+  smoke.classList.add("smoke");
+  smoke.style.left = Math.random() * 100 + "%";
+  smoke.style.width = 10 + Math.random() * 20 + "px";
+  smoke.style.height = 40 + Math.random() * 80 + "px";
+  smoke.style.animationDuration = 3 + Math.random() * 5 + "s";
+  smoke.style.opacity = 0.2 + Math.random() * 0.5;
+  fireLayer.appendChild(smoke);
+}
+
+
+
 
 const questionPool = [
+    // ---------------- CHAPTER 1 ----------------
     {
-        question: "[Chapter 1] What year was C++ first released?",
-        options: ["1972", "1985", "1996", "2002"],
+        question: "[Chapter 1] What is the purpose of the compiler in C++?",
+        options: [
+            "To execute the source code directly",
+            "To translate source code into machine code",
+            "To check for logical errors only",
+            "To display runtime errors"
+        ],
         answer: 1
     },
     {
-        question: "[Chapter 1] Which of the following is NOT a reason to learn C++ today?",
-        options: ["Speed", "Portability", "Limited job opportunities", "Scalability"],
+        question: "[Chapter 1] Which file extension is used for a C++ source file?",
+        options: [".exe", ".cpp", ".class", ".txt"],
+        answer: 1
+    },
+    {
+        question: "[Chapter 1] What does the statement '#include <iostream>' do?",
+        options: [
+            "Includes functions for file I/O",
+            "Includes standard input/output stream objects",
+            "Creates a main() function",
+            "Defines integer data types"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 1] In Visual Studio, what does 'Start Without Debugging' do?",
+        options: [
+            "Runs the program and closes the console immediately",
+            "Runs the program and keeps the console window open",
+            "Runs only part of the code",
+            "Starts in debug mode with breakpoints"
+        ],
+        answer: 1
+    },
+
+    // ---------------- CHAPTER 2–3 ----------------
+    {
+        question: "[Chapter 3] Which of the following is a valid 'if' statement?",
+        options: [
+            "if x > 5 { cout << x; }",
+            "if (x > 5) cout << x;",
+            "if (x > 5); cout << x;",
+            "if x > 5 then cout << x;"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 3] What will happen if 'break' is missing in a switch case?",
+        options: [
+            "The program will crash",
+            "The program skips to default automatically",
+            "The next case statements will also execute",
+            "It repeats the same case forever"
+        ],
         answer: 2
     },
     {
-        question: "[Chapter 1] What type of applications is C++ commonly used for?",
-        options: ["Web design only", "Embedded systems, games, and operating systems", "Spreadsheet macros", "Social media platforms"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 1] What does an IDE like Visual Studio or Xcode provide?",
-        options: ["Only a text editor", "Code completion, debugging, and compilation tools", "A database engine", "A web browser"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 1] What happens when you press Ctrl+F5 in Visual Studio?",
-        options: ["The project is deleted", "The project is compiled and run without debugging", "The project is saved to the cloud", "The project opens in Xcode"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 1] Which of the following is a benefit of using an IDE like Visual Studio or Xcode?",
-        options: ["Manual compilation", "Limited debugging tools", "Code completion and error detection", "No support for C++"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 1] What does the 'Start Without Debugging' option in Visual Studio do?",
-        options: ["Deletes the project", "Runs the project and closes the console immediately", "Compiles and runs the project, keeping the console open", "Opens the project in Xcode"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 1] Which C++ standard introduced major modern features like auto and lambda expressions?",
-        options: ["C++98", "C++03", "C++11", "C++17"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 1] What is the purpose of the main() function in a C++ program?",
-        options: ["To declare variables", "To define the program’s entry point", "To display errors", "To compile the code"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 1] Which of the following is NOT a general-purpose programming language listed in the slides?",
-        options: ["C", "C++", "Java", "Python"],
+        question: "[Chapter 3] Which logical operator has the highest precedence?",
+        options: ["||", "&&", "==", "!"],
         answer: 3
     },
     {
-        question: "[Chapter 2] Which function from the cmath header rounds a number to the nearest whole number?",
-        options: ["round()", "ceil()", "floor()", "pow()"],
+        question: "[Chapter 3] What is the output of the expression (5 > 3 && 2 < 1)?",
+        options: ["true", "false", "1", "0"],
+        answer: 1
+    },
+    {
+        question: "[Chapter 3] Which statement is TRUE about if...else if...else structures?",
+        options: [
+            "All conditions are checked even after one is true",
+            "Only one block executes once a condition is true",
+            "An else block must always be included",
+            "They cannot contain nested if statements"
+        ],
+        answer: 1
+    },
+
+    // ---------------- CHAPTER 4 ----------------
+    {
+        question: "[Chapter 4] Which loop is guaranteed to run at least once?",
+        options: ["while", "for", "do-while", "infinite while"],
+        answer: 2
+    },
+    {
+        question: "[Chapter 4] What does the 'continue' statement do?",
+        options: [
+            "Terminates the program",
+            "Skips the rest of the loop and starts next iteration",
+            "Exits the loop immediately",
+            "Repeats the previous iteration"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 4] Which of the following correctly defines a for loop?",
+        options: [
+            "for (int i = 0; i < 10; ++i)",
+            "for i = 0 to 10",
+            "loop(i < 10)",
+            "for i++ until 10"
+        ],
         answer: 0
     },
     {
-        question: "[Chapter 2] What does the pow() function do in C++?",
-        options: ["Returns the square root", "Rounds a number", "Raises a base to an exponent", "Finds the absolute value"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 2] What is the purpose of the srand() function?",
-        options: ["To generate a random number", "To seed the random number generator", "To round a number", "To simulate a dice roll"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 2] What header file must be included to use the string class?",
-        options: ["<iostream>", "<cmath>", "<string>", "<cstdlib>"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 2] What does the getline() function do?",
-        options: ["Reads a single word", "Reads a single character", "Reads an entire line of text", "Clears the input buffer"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 2] What does the expression round(x * 100) / 100 accomplish?",
-        options: ["Rounds x to the nearest whole number", "Rounds x to 1 decimal place", "Rounds x to 2 decimal places", "Rounds x to the nearest hundred"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 2] What does the expression rand() % 6 + 1 simulate?",
-        options: ["A coin flip", "A random number between 0 and 5", "A random number between 1 and 6", "A random number between 1 and 49"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 2] What is the purpose of cin.ignore() after cin >> account_num?",
-        options: ["To clear the screen", "To discard leftover newline characters", "To reset the input stream", "To ignore the next input"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 2] What is the result of the string expression: first_name + ' ' + middle_initial + ' ' + last_name?",
-        options: ["Concatenates first and last name only", "Creates a full name with middle initial", "Returns only the middle initial", "Throws a syntax error"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 2] Which escape sequence represents a tab character?",
-        options: ["\\n", "\\t", "\\r", "\\\\"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 3] What does the == operator do in C++?",
-        options: ["Assigns a value", "Checks for inequality", "Checks for equality", "Negates a Boolean expression"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 3] Which of the following is a logical operator?",
-        options: ["==", "&&", "++", "="],
-        answer: 1
-    },
-    {
-        question: "[Chapter 3] What is the result of tolower(choice) == 'y'?",
-        options: ["True only if choice is 'y'", "True if choice is 'Y' or 'y'", "Always false", "True only if choice is 'Y'"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 3] Which statement correctly uses a conditional operator?",
-        options: ["if (x > 0) ? 1 : 0;", "x = (x > 0) ? 1 : 0;", "x ? x > 0 : 0;", "x = x > 0 : 1 ? 0;"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 3] What is the purpose of a switch statement?",
-        options: ["To compare strings", "To loop through values", "To select code based on a variable’s value", "To declare multiple variables"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 3] What is the result of the expression (subtotal >= 100) ? .1 : .05?",
-        options: ["It assigns .1 if subtotal is less than 100", "It assigns .05 if subtotal is greater than 100", "It assigns .1 if subtotal is at least 100, otherwise .05", "It always assigns .1"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 3] Which statement best describes how C++ evaluates clauses in an if statement?",
-        options: ["From bottom to top", "Randomly", "From top to bottom, stopping at the first true clause", "All clauses are evaluated regardless of condition"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 3] What is the purpose of the break statement in a switch block?",
-        options: ["To skip the current case", "To exit the switch block after a case is executed", "To continue to the next case", "To restart the switch block"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 3] What happens if you omit the break statement in a switch case?",
-        options: ["The program crashes", "The case is skipped", "Execution falls through to the next case", "The switch block ends immediately"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 3] Which of the following is a valid use of a switch statement?",
-        options: ["switch (subtotal > 100)", "switch (customer_type)", "switch (discount_percent > .1)", "switch (subtotal >= 100 ? 1 : 0)"],
-        answer: 1
-    },
-        {
-        question: "[Chapter 4] Which loop guarantees at least one execution of its body?",
-        options: ["while loop", "do-while loop", "for loop", "infinite loop"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 4] What is the correct syntax for a while loop?",
-        options: ["while { condition }", "while (condition) { statements }", "loop while (condition)", "do while (condition)"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 4] What does the continue statement do in a loop?",
-        options: ["Ends the loop", "Skips the current iteration and jumps to the next", "Exits the program", "Repeats the last iteration"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 4] Which arithmetic operator is unary?",
-        options: ["+", "*", "++", "%"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 4] What is the result of prefixing an increment operator (++x)?",
-        options: ["Returns x before incrementing", "Returns x after incrementing", "Decrements x", "Multiplies x by 2"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 4] What is the correct syntax for a for loop?",
-        options: ["for (condition)", "for (initialization; condition; increment)", "for {initialization; condition; increment}", "loop (initialization; condition; increment)"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 4] What is the result of the loop: for (int i = 8; i > 0; i -= 2)?",
-        options: ["Adds 1 through 8", "Adds 8, 6, 4, 2", "Adds 2, 4, 6, 8", "Infinite loop"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 4] Which loop structure is best when you want to prompt the user at least once and keep repeating until they enter 'n'?",
-        options: ["for loop", "while loop", "do-while loop", "switch statement"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 4] What does a nested loop allow you to do?",
-        options: ["Repeat a loop once", "Skip loop conditions", "Run one loop inside another", "Terminate all loops"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 4] What is the purpose of the break statement in a loop?",
-        options: ["Skip to the next iteration", "Exit the loop immediately", "Restart the loop", "Pause the loop"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 5] What does cin.fail() check for?",
-        options: ["End of file", "Successful input", "Invalid input operation", "Empty stream"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 5] Which stream manipulator sets the number of decimal places?",
-        options: ["setw()", "fixed", "setprecision()", "endl"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 5] What does ios::app do when opening a file?",
-        options: ["Reads from the file", "Overwrites the file", "Appends data to the file", "Closes the file"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 5] What is the purpose of cin.ignore(numeric_limits<streamsize>::max(), '\\n')?",
-        options: ["To reset the stream", "To discard all remaining input up to a newline", "To read a string", "To flush the output buffer"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 5] Which file stream class allows both input and output?",
-        options: ["ifstream", "ofstream", "fstream", "iostream"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 5] What does the stream manipulator fixed do?",
-        options: ["Displays numbers in scientific notation", "Rounds numbers to whole integers", "Displays floating-point numbers with fixed decimal places", "Clears the input stream"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 5] Which stream manipulator forces trailing zeros?",
-        options: ["setw()", "showpoint", "endl", "setprecision()"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 5] What does the getline() function do when a newline character is left in the input stream?",
-        options: ["Reads the next word", "Skips the newline", "Reads the newline as input", "Clears the stream"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 5] What is the result of opening a file with ios::out | ios::trunc?",
-        options: ["Appends data to the file", "Reads data from the file", "Deletes existing data and writes new data", "Opens the file in binary mode"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 5] Which header file is required to use file stream classes like ifstream and ofstream?",
-        options: ["<iostream>", "<fstream>", "<string>", "<limits>"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 6] Which of the following is a fundamental data type in C++?",
-        options: ["string", "vector", "double", "array"],
-        answer: 2
-    },
-    {
-        question: "[Chapter 6] What does the sizeof operator return?",
-        options: ["The number of elements in a vector", "The size of a type or variable in bytes", "The length of a string", "The maximum value of a type"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 6] What does the expression static_cast<int>(93.67) do?",
-        options: ["Promotes 93.67 to a double", "Demotes 93.67 to an int", "Converts 93.67 to a string", "Rounds 93.67 to the nearest integer"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 6] Which vector member function adds an element to the end of the vector?",
-        options: ["push_back()", "insert()", "append()", "add()"],
+        question: "[Chapter 4] What will this loop display: for(int i=1; i<=3; ++i) cout << i;",
+        options: ["123", "012", "1 2 3", "Error"],
         answer: 0
     },
     {
-        question: "[Chapter 6] What happens when you access scores[3] in a vector with only 3 elements?",
-        options: ["Returns the last element", "Throws an out-of-bounds error", "Returns 0", "Accesses an undefined value"],
-        answer: 3
+        question: "[Chapter 4] What is the main difference between 'while' and 'do-while' loops?",
+        options: [
+            "while loops always run once, do-while may not",
+            "do-while checks the condition after executing the loop body",
+            "while loops require braces, do-while does not",
+            "They are identical"
+        ],
+        answer: 1
+    },
+
+    // ---------------- CHAPTER 5 ----------------
+    {
+        question: "[Chapter 5] What does the stream manipulator setprecision(3) do?",
+        options: [
+            "Sets field width to 3 characters",
+            "Rounds numbers to 3 decimal places",
+            "Displays 3 digits total",
+            "Limits input to 3 characters"
+        ],
+        answer: 1
     },
     {
-        question: "[Chapter 6] What does the expression vector<int> scores = {99, 87, 91}; do?",
-        options: ["Creates a vector with 0 elements", "Creates a vector with 3 elements initialized to 0", "Creates a vector with 3 elements and assigns values", "Creates a string of scores"],
+        question: "[Chapter 5] What is the purpose of 'cin.fail()'?",
+        options: [
+            "Checks if the last input operation failed",
+            "Clears the input buffer",
+            "Stops reading from cin",
+            "Displays an error message automatically"
+        ],
+        answer: 0
+    },
+    {
+        question: "[Chapter 5] Which of these opens a file for appending data?",
+        options: [
+            'ofstream file("data.txt", ios::out);',
+            'ofstream file("data.txt", ios::trunc);',
+            'ofstream file("data.txt", ios::app);',
+            'ofstream file("data.txt");'
+        ],
         answer: 2
     },
     {
-        question: "[Chapter 6] Which string member function removes the last character?",
-        options: ["pop_back()", "clear()", "erase()", "remove()"],
+        question: "[Chapter 5] What does 'cin.ignore(numeric_limits<streamsize>::max(), '\\n')' do?",
+        options: [
+            "Ignores only one character",
+            "Clears the input buffer up to a newline",
+            "Reads input until the end of file",
+            "Flushes all output to the screen"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 5] Which header is needed for setw() and setprecision()?",
+        options: ["<fstream>", "<iostream>", "<iomanip>", "<string>"],
+        answer: 2
+    },
+
+    // ---------------- CHAPTER 6 ----------------
+    {
+        question: "[Chapter 6] Which statement correctly declares a vector of integers?",
+        options: [
+            "int vector[];",
+            "vector<int> nums;",
+            "array<int> nums;",
+            "vector nums<int>;"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 6] What does 'scores.push_back(100);' do?",
+        options: [
+            "Adds 100 to the start of the vector",
+            "Adds 100 to the end of the vector",
+            "Removes the last element of the vector",
+            "Replaces all values with 100"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 6] Which method returns the number of elements in a vector?",
+        options: [".count()", ".length()", ".size()", ".total()"],
+        answer: 2
+    },
+    {
+        question: "[Chapter 6] What is the result of static_cast<int>(7.9)?",
+        options: ["7", "8", "7.9", "Error"],
         answer: 0
     },
     {
-        question: "[Chapter 6] What does the find_first_of() function do?",
-        options: ["Finds the first character not in a set", "Finds the first matching character from a set", "Finds the last matching character", "Finds the first whitespace character"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 6] What is the result of numeric_limits<int>::max()?",
-        options: ["The smallest possible int", "The largest possible int", "The average int value", "The number of bytes in an int"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 6] What does the expression name.substr(0, index) return?",
-        options: ["The last character of name", "The full name string", "A substring starting at index", "A substring from the beginning up to index"],
-        answer: 3
-    },
-    {
-        question: "[Chapter 2] What is the output of this code?\n\ncout << round(10.315);",
-        options: ["10", "10.3", "10.32", "11"],
+        question: "[Chapter 6] Which function checks if a character is a letter?",
+        options: ["isalpha()", "isdigit()", "isspace()", "isalnum()"],
         answer: 0
     },
     {
-        question: "[Chapter 4] What is the output of this loop?\n\nint i = 1;\nwhile (i < 4) {\n  cout << i << ' ';\n  ++i;\n}",
-        options: ["1 2 3", "1 2 3 4", "0 1 2 3", "2 3 4"],
+        question: "[Chapter 6] What does s.substr(1,3) return if s = 'Hello'?",
+        options: ["Hel", "ell", "llo", "He"],
+        answer: 1
+    },
+    {
+        question: "[Chapter 6] What is true about vectors in C++?",
+        options: [
+            "They have a fixed size once declared",
+            "They automatically resize when elements are added",
+            "They can only hold integers",
+            "They must be manually deleted"
+        ],
+        answer: 1
+    },
+    // ---------------- CHAPTER 3: IF / SWITCH ----------------
+    {
+        question: `[Chapter 3] What is the output of this code?\n\nint x = 3;\nint y = 4;\nif (x > y)\n    cout << "A";\nelse if (x == y)\n    cout << "B";\nelse\n    cout << "C";`,
+        options: ["A", "B", "C", "No output"],
+        answer: 2
+    },
+    {
+        question: `[Chapter 3] What is displayed?\n\nint a = 5;\nint b = 10;\nif (a = b)\n    cout << "Equal";\nelse\n    cout << "Not equal";`,
+        options: ["Equal", "Not equal", "Error", "No output"],
         answer: 0
     },
     {
-        question: "[Chapter 3] What is the output?\n\nint x = 5;\nint y = 10;\ncout << (x > y ? x : y);",
-        options: ["5", "10", "true", "false"],
+        question: `[Chapter 3] What is printed?\n\nint num = 2;\nswitch(num) {\n  case 1: cout << "One"; break;\n  case 2: cout << "Two";\n  case 3: cout << "Three"; break;\n  default: cout << "Default";\n}`,
+        options: ["Two", "TwoThree", "Three", "Default"],
         answer: 1
     },
+
+    // ---------------- CHAPTER 4: LOOPS ----------------
     {
-        question: "[Chapter 6] What is the output?\n\nstring name = \"Grace\";\ncout << name[0];",
-        options: ["G", "r", "Grace", "0"],
+        question: `[Chapter 4] Guess the output:\n\nint a = 5;\nwhile (a > 0) {\n  cout << a << " ";\n  a--;\n}`,
+        options: ["5 4 3 2 1", "4 3 2 1 0", "5 4 3 2", "Infinite loop"],
         answer: 0
     },
     {
-        question: "[Chapter 5] What is the output?\n\ncout << fixed << setprecision(2) << 19.5;",
-        options: ["19.5", "19.50", "19.500", "19"],
+        question: `[Chapter 4] What does this print?\n\nfor (int i = 0; i < 3; ++i)\n  cout << i << " ";`,
+        options: ["1 2 3", "0 1 2", "0 1 2 3", "1 2"],
         answer: 1
     },
     {
-        question: "[Chapter 2] What is the output?\n\ncout << \"Code: CPP\\nPrice: $49.50\";",
-        options: ["Code: CPP Price: $49.50", "Code: CPP\nPrice: $49.50", "Code: CPP\\nPrice: $49.50", "CPP $49.50"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 3] What is the output?\n\nint score = 105;\nif (score >= 0 && score <= 100)\n  cout << \"Valid\";\nelse\n  cout << \"Invalid\";",
-        options: ["Valid", "Invalid", "Error", "Nothing"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 4] What is the output?\n\nfor (int i = 1; i <= 3; ++i)\n  cout << i << ' ';",
-        options: ["1 2 3", "0 1 2", "1 2 3 4", "2 3 4"],
+        question: `[Chapter 4] Output of the nested loop:\n\nfor (int i = 1; i <= 2; ++i)\n  for (int j = 1; j <= 3; ++j)\n    cout << i << j << " ";`,
+        options: ["11 12 13 21 22 23", "12 13 21 22 23", "11 22 33", "123123"],
         answer: 0
     },
     {
-        question: "[Chapter 5] What is the output?\n\ncout << setw(6) << \"Hi\" << endl;",
-        options: ["Hi", "    Hi", "Hi    ", "Error"],
+        question: `[Chapter 4] What is displayed?\n\nint total = 0;\nfor (int i = 1; i <= 4; ++i)\n  total += i;\ncout << total;`,
+        options: ["4", "10", "6", "0"],
         answer: 1
     },
     {
-        question: "[Chapter 6] What is the output?\n\nvector<int> scores = {99, 87, 91};\ncout << scores.at(1);",
-        options: ["99", "87", "91", "Error"],
-        answer: 1
-    },
-        {
-        question: "[Chapter 3] What is the output?\n\nint x = 5;\nint y = 10;\ncout << (x > y ? x : y);",
-        options: ["5", "10", "true", "false"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 3] What is the output?\n\nint age = 17;\ncout << (age >= 18 ? \"Adult\" : \"Minor\");",
-        options: ["Adult", "Minor", "True", "False"],
-        answer: 1
-    },
-    {
-        question: "[Chapter 3] What is the output?\n\nint score = 92;\ncout << (score >= 90 ? \"A\" : \"B\");",
-        options: ["A", "B", "C", "92"],
+        question: `[Chapter 4] Guess the output:\n\nint x = 1;\ndo {\n  cout << x << " ";\n  ++x;\n} while (x < 4);`,
+        options: ["1 2 3", "1 2 3 4", "0 1 2", "Infinite loop"],
         answer: 0
     },
     {
-        question: "[Chapter 3] What is the output?\n\nint temp = 32;\ncout << (temp < 0 ? \"Freezing\" : \"Above freezing\");",
-        options: ["Freezing", "Above freezing", "0", "32"],
+        question: `[Chapter 4] What happens here?\n\nfor (int i = 1; i <= 5; ++i) {\n  if (i == 3) continue;\n  cout << i << " ";\n}`,
+        options: ["1 2 3 4 5", "1 2 4 5", "1 2", "1 2 3"],
+        answer: 1
+    },
+
+    // ---------------- CHAPTER 5: I/O STREAMS ----------------
+    {
+        question: `[Chapter 5] What is the output?\n\ndouble d = 3.14159;\ncout << fixed << setprecision(2) << d;`,
+        options: ["3.14", "3.1", "3.142", "3"],
+        answer: 0
+    },
+    {
+        question: `[Chapter 5] Predict the output:\n\ncout << setw(5) << 42 << setw(5) << 7;`,
+        options: ["42---7", "42-7", "---42---7", "427"],
+        answer: 2
+    },
+
+    // ---------------- CHAPTER 6: STRINGS ----------------
+    {
+        question: `[Chapter 6] What is displayed?\n\nstring s = "Hello";\ncout << s.substr(1, 3);`,
+        options: ["Hel", "ell", "llo", "He"],
         answer: 1
     },
     {
-        question: "[Chapter 3] What is the output?\n\nint num = 0;\ncout << (num != 0 ? \"Non-zero\" : \"Zero\");",
-        options: ["Zero", "Non-zero", "True", "False"],
-        answer: 0
-    },
-    {
-        question: "[Chapter 3] What is the output?\n\nint x = 3;\nint y = 7;\ncout << (x == y ? \"Equal\" : \"Not equal\");",
-        options: ["Equal", "Not equal", "True", "False"],
+        question: `[Chapter 6] What is printed?\n\nstring s = "C++";\nfor (int i = s.size() - 1; i >= 0; --i)\n  cout << s[i];`,
+        options: ["C++", "++C", "C+", "Error"],
         answer: 1
     },
     {
-        question: "[Chapter 3] What is the output?\n\nint discount = 0;\nint subtotal = 120;\ndiscount = (subtotal >= 100 ? 10 : 5);\ncout << discount;",
-        options: ["5", "10", "100", "0"],
+        question: `[Chapter 6] What does this output?\n\nint i = 3;\ncout << i++ << " ";\n\ncout << ++i;`,
+        options: ["3 4", "3 5", "4 5", "Error"],
         answer: 1
     },
     {
-        question: "[Chapter 3] What is the output?\n\nint x = 4;\ncout << (x % 2 == 0 ? \"Even\" : \"Odd\");",
-        options: ["Even", "Odd", "True", "False"],
-        answer: 0
-    },
-    {
-        question: "[Chapter 3] What is the output?\n\nint score = 75;\ncout << (score >= 60 ? \"Pass\" : \"Fail\");",
-        options: ["Pass", "Fail", "True", "False"],
-        answer: 0
-    },
-    {
-        question: "[Chapter 3] What is the output?\n\nint x = 1;\ncout << (x ? \"True\" : \"False\");",
-        options: ["True", "False", "1", "0"],
-        answer: 0
-    },
-    {
-        question: "[Chapter 3] What is the output?\n\nint a = 3;\nint b = 3;\ncout << (a != b ? \"Mismatch\" : \"Match\");",
-        options: ["Mismatch", "Match", "True", "False"],
+        question: `[Chapter 6] What is displayed?\n\nvector<int> nums {2, 4, 6};\nfor (int n : nums)\n  cout << n * 2 << " ";`,
+        options: ["2 4 6", "4 8 12", "8 16 24", "Error"],
         answer: 1
     },
     {
-        question: "[Chapter 3] What is the output?\n\nint x = -1;\ncout << (x >= 0 ? \"Positive\" : \"Negative\");",
-        options: ["Positive", "Negative", "Zero", "Error"],
+        question: `[Chapter 6] What will this display?\n\nint x = 10;\nif (x > 5)\n  if (x > 15)\n    cout << "A";\n  else\n    cout << "B";\nelse\n  cout << "C";`,
+        options: ["A", "B", "C", "No output"],
         answer: 1
     },
     {
-        question: "[Chapter 3] What is the output?\n\nint x = 0;\ncout << (x == 0 ? \"Zero\" : \"Non-zero\");",
-        options: ["Zero", "Non-zero", "True", "False"],
+        question: `[Chapter 6] Predict the output:\n\ncout << (3 < 2 || 5 > 4 && 2 < 1);`,
+        options: ["1", "0", "true", "false"],
+        answer: 1
+    },
+    {
+        question: `[Chapter 6] What will be printed?\n\nint i = 1;\nwhile (i <= 3) {\n  cout << i++ << " ";\n}`,
+        options: ["1 2 3", "0 1 2", "1 2", "1 2 3 4"],
         answer: 0
     },
     {
-        question: "[Chapter 3] What is the output?\n\nint x = 7;\ncout << (x % 2 == 1 ? \"Odd\" : \"Even\");",
-        options: ["Odd", "Even", "True", "False"],
+        question: "[Chapter 5] What does cin.fail() return if the last input operation failed?",
+        options: ["true", "false", "0", "It throws an exception"],
         answer: 0
     },
     {
-        question: "[Chapter 3] What is the output?\n\nint x = 100;\ncout << (x >= 100 ? \"Max\" : \"Below Max\");",
-        options: ["Max", "Below Max", "100", "Error"],
+        question: "[Chapter 5] What is the purpose of cin.clear()?",
+        options: ["Clears the screen", "Resets the input stream's error state", "Skips to the next line", "Flushes the output buffer"],
+        answer: 1
+    },
+    {
+        question: "[Chapter 5] What does cin.ignore(1000, '\\n') do?",
+        options: ["Skips 1000 characters", "Skips up to 1000 characters or until a newline", "Clears the output buffer", "Reads a line of input"],
+        answer: 1
+    },
+    {
+        question: "[Chapter 5] What happens if you try to read a string into an int variable using cin?",
+        options: ["The string is converted to 0", "The program crashes", "cin enters a fail state", "The string is ignored"],
+        answer: 2
+    },
+    {
+        question: "[Chapter 5] What is the correct sequence to recover from invalid numeric input?",
+        options: ["cin.clear(); cin.ignore();", "cin.ignore(); cin.clear();", "cin.fail(); cin.clear();", "cin.clear(); cin.get();"],
         answer: 0
-    }
+    },
+    {
+        question: "[Chapter 6] What happens if you call v.at(10) on a vector with only 5 elements?",
+        options: ["Returns 0", "Returns garbage", "Throws an out_of_range exception", "Returns the last element"],
+        answer: 2
+    },
+    {
+        question: "[Chapter 6] What is the safest way to access a vector element with bounds checking?",
+        options: ["v[i]", "v.get(i)", "v.at(i)", "v.index(i)"],
+        answer: 2
+    },
+    {
+        question: "[Chapter 6] What does string::npos represent?",
+        options: ["The first index of a string", "The last character", "An invalid position or 'not found'", "The null terminator"],
+        answer: 2
+    },
+    {
+        question: "[Chapter 6] What should you check before calling substr(pos, len) on a string?",
+        options: ["That pos is less than the string's length", "That len is greater than 0", "That the string is empty", "That pos is a multiple of len"],
+        answer: 0
+    },
+    {
+        question: "[Chapter 5] What is a common cause of infinite loops when using cin in a loop?",
+        options: ["Using cin.ignore() too early", "Failing to clear the error state after invalid input", "Using endl instead of '\\n'", "Using setprecision() incorrectly"],
+        answer: 1
+    },
+  // ---------------- CHAPTER 7 ----------------
+  {
+    question: "[Chapter 7] What is the purpose of a function prototype?",
+    options: [
+      "It executes the function",
+      "It declares a function before it’s used",
+      "It imports a library",
+      "It allocates memory on the heap"
+    ],
+    answer: 1
+  },
+  {
+    question: "[Chapter 7] What happens when a variable inside a function has the same name as a global variable?",
+    options: [
+      "The program crashes",
+      "The global variable is deleted",
+      "The local variable shadows the global variable",
+      "Both variables merge into one"
+    ],
+    answer: 2
+  },
+  {
+    question: "[Chapter 7] Which of the following correctly creates a reference parameter?",
+    options: [
+      "void add(int x)",
+      "void add(int &x)",
+      "void add(&int x)",
+      "void add(ref int x)"
+    ],
+    answer: 1
+  },
+  {
+    question: "[Chapter 7] What is function overloading?",
+    options: [
+      "Writing functions inside other functions",
+      "Using the same function name with different parameters",
+      "Creating too many functions in a program",
+      "Calling multiple functions at once"
+    ],
+    answer: 1
+  },
+  {
+    question: "[Chapter 7] What must every header file include?",
+    options: [
+      "A main() function",
+      "Using namespace std;",
+      "Include guards",
+      "A class definition"
+    ],
+    answer: 2
+  },
+
+  // ---------------- CHAPTER 8 ----------------
+  {
+    question: "[Chapter 8] What is the main goal of testing?",
+    options: [
+      "To optimize performance",
+      "To find all bugs before release",
+      "To rewrite the program",
+      "To add new features"
+    ],
+    answer: 1
+  },
+  {
+    question: "[Chapter 8] What type of error occurs when a program compiles but produces wrong results?",
+    options: [
+      "Syntax error",
+      "Runtime error",
+      "Logic error",
+      "Hardware error"
+    ],
+    answer: 2
+  },
+  {
+    question: "[Chapter 8] What does a breakpoint do in a debugger?",
+    options: [
+      "Speeds up execution",
+      "Stops the program at a specific line",
+      "Deletes that line of code",
+      "Runs the program without compiling"
+    ],
+    answer: 1
+  },
+  {
+    question: "[Chapter 8] Why is comparing floating-point values using == dangerous?",
+    options: [
+      "They can store only whole numbers",
+      "Floating-point precision errors make exact equality unreliable",
+      "The == operator is disabled for doubles",
+      "It always causes a compiler warning"
+    ],
+    answer: 1
+  },
+  {
+    question: "[Chapter 8] Which of the following is a common testing mistake?",
+    options: [
+      "Testing both valid and invalid input",
+      "Creating a test plan first",
+      "Assuming results are correct because they 'look right'",
+      "Running the program multiple times"
+    ],
+    answer: 2
+  },
+
+  // ---------------- CHAPTER 13 ----------------
+  {
+    question: "[Chapter 13] What is the purpose of a try block?",
+    options: [
+      "To crash the program on error",
+      "To contain code that may throw exceptions",
+      "To ignore all errors",
+      "To restart program execution"
+    ],
+    answer: 1
+  },
+  {
+    question: "[Chapter 13] What happens when a function throws an exception and no catch block handles it?",
+    options: [
+      "The exception is ignored",
+      "The program continues normally",
+      "Stack unwinding stops and the program terminates",
+      "The compiler rewrites the code automatically"
+    ],
+    answer: 2
+  },
+  {
+    question: "[Chapter 13] Which of the following throws an exception correctly?",
+    options: [
+      "throw;",
+      "catch(error);",
+      "throw value;",
+      "throwException(value);"
+    ],
+    answer: 2
+  },
+  {
+    question: "[Chapter 13] Why should exceptions be thrown by value and caught by reference?",
+    options: [
+      "To prevent copying and slicing",
+      "Because pointers cannot be thrown",
+      "Because references are faster to type",
+      "Because throw only works with references"
+    ],
+    answer: 0
+  },
+  {
+    question: "[Chapter 13] Which statement about exception handling is TRUE?",
+    options: [
+      "Only one catch block is allowed",
+      "You can catch different exception types with multiple catch blocks",
+      "Exceptions must always end the program",
+      "try blocks cannot contain function calls"
+    ],
+    answer: 1
+  },
+
+  // ---------------- CHAPTER 14 ----------------
+  {
+    question: "[Chapter 14] What is encapsulation?",
+    options: [
+      "Writing all code in main()",
+      "Restricting access to data inside a class",
+      "Combining multiple classes into one",
+      "Allowing all code to access all variables"
+    ],
+    answer: 1
+  },
+  {
+    question: "[Chapter 14] What is the purpose of a constructor?",
+    options: [
+      "To destroy objects",
+      "To initialize object data",
+      "To print debug messages",
+      "To create functions inside a class"
+    ],
+    answer: 1
+  },
+  {
+    question: "[Chapter 14] Why are member variables usually private?",
+    options: [
+      "To make the program run faster",
+      "To prevent other code from modifying the data directly",
+      "C++ requires it",
+      "Private variables use less memory"
+    ],
+    answer: 1
+  },
+  {
+    question: "[Chapter 14] What does the 'this' pointer refer to?",
+    options: [
+      "The parent class",
+      "The object that called the member function",
+      "The global namespace",
+      "The most recent exception"
+    ],
+    answer: 1
+  },
+  {
+    question: "[Chapter 14] Which is a correct way to define a class?",
+    options: [
+      "class Car {}",
+      "class Car();",
+      "Car class {}",
+      "define class Car {}"
+    ],
+    answer: 0
+  },
+
+  // ---------------- TYPE OF ERRORS ----------------
+  {
+    question: "[Type of Error] What type of error occurs when the compiler detects invalid syntax?",
+    options: [
+      "Runtime error",
+      "Logic error",
+      "Syntax error",
+      "Linker error"
+    ],
+    answer: 2
+  },
+  {
+    question: "[Type of Error] What type of error occurs when a program compiles but crashes during execution?",
+    options: [
+      "Syntax error",
+      "Runtime error",
+      "Logic error",
+      "Compilation error"
+    ],
+    answer: 1
+  },
+  {
+    question: "[Type of Error] Which type of error occurs when the program runs but produces incorrect output?",
+    options: [
+      "Logic error",
+      "Syntax error",
+      "Runtime error",
+      "Linker error"
+    ],
+    answer: 0
+  },
+  {
+    question: "[Type of Error] What kind of error is caused by dividing by zero at runtime?",
+    options: [
+      "Logic error",
+      "Syntax error",
+      "Runtime error",
+      "Compile-time warning"
+    ],
+    answer: 2
+  },
+  {
+    question: "[Type of Error] Forgetting a semicolon at the end of a statement will produce what type of error?",
+    options: [
+      "Logic error",
+      "Syntax error",
+      "Runtime error",
+      "Memory error"
+    ],
+    answer: 1
+  },
+  {
+    question: "[Type of Error] Using an uninitialized variable may result in what type of error?",
+    options: [
+      "Syntax error",
+      "Logic error",
+      "Runtime error",
+      "Compilation error"
+    ],
+    answer: 2
+  },
+  {
+    question: "[Type of Error] Using the wrong operator in a condition (e.g., = instead of ==) is classified as what type of error?",
+    options: [
+      "Syntax error",
+      "Logic error",
+      "Runtime error",
+      "Linker error"
+    ],
+    answer: 1
+  },
+  {
+    question: "[Type of Error] A program that references a variable outside its scope will cause what type of error?",
+    options: [
+      "Logic error",
+      "Runtime error",
+      "Syntax error",
+      "Memory leak"
+    ],
+    answer: 2
+  },
+  {
+    question: "[Type of Error] Accessing an array element out of bounds is considered which type of error?",
+    options: [
+      "Syntax error",
+      "Logic error",
+      "Runtime error",
+      "Compile-time error"
+    ],
+    answer: 2
+  },
+  {
+    question: "[Type of Error] Forgetting to include a required header file can result in what type of error?",
+    options: [
+      "Syntax error",
+      "Linker or compile-time error",
+      "Runtime error",
+      "Logic error"
+    ],
+    answer: 1
+  }
 ];
+
 
 const followUpMessages = [
   "Would you like me to generate another question for you?",
@@ -489,6 +815,40 @@ const followUpMessages = [
     "Did you know? Sonic is fast because of his shoes, just ask Emma!",
     "Did you know? Sonic is fast because of his shoes, just ask Emma!",
     "Did you know? Sonic is fast because of his shoes, just ask Emma!",
+    "STEM HUB ALERT",
+    "STEM HUB ALERT",
+    "STEM HUB ALERT",
+    "STEM HUB ALERT",
+    "STEM HUB ALERT",
+    "STEM HUB ALERT",
+    "STEM HUB ALERT",
+    "STEM HUB ALERT",
+    "STEM HUB ALERT",
+    "You should know this!",
+    "bitch.",
+    "cloud compute motherfucker",
+    "Sonic Unleashed",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?",
+    "Remy, why did you purchase the textbook?"
 ];
 
 
@@ -496,7 +856,7 @@ let selectedQuestions = [];
 let current = 0;
 let score = 0;
 let timer;
-let timeLeft = 30;
+let timeLeft = 60;
 
 const questionEl = document.getElementById("question");
 const optionsEl = document.getElementById("options");
@@ -515,7 +875,7 @@ const liveNameSpan = document.getElementById("live-name");
 
 playerInput.addEventListener("input", () => {
   const name = playerInput.value.trim();
-  liveNameSpan.textContent = name ? `, ${name}` : "";
+  liveNameSpan.textContent = name ? `${name}` : "";
 });
 
 let playerName = "";
@@ -570,7 +930,7 @@ startBtn.onclick = () => {
 
 // ✅ Blocked names: Blanc, Saeed, Sergio, Sultan
 if (
-  ["blanc", "saeed", "sergio", "sultan", "mccully", "fuck you", "bitch", "alyssa sucks", "allie sucks"].includes(lowerName)
+  ["blanc", "saeed", "sergio", "sultan", "mccully", "harry", "test", "fuck you", "bitch", "alyssa sucks", "allie sucks"].includes(lowerName)
 ) {
   alert("Access denied.");
   window.close(); // May not work in all browsers unless opened via script
@@ -596,7 +956,7 @@ if (
 
   totalQuestions = parseInt(questionCountSelect.value);
   selectedQuestions = questionPool.sort(() => 0.5 - Math.random()).slice(0, totalQuestions);
-    basicMode = basicModeToggle.checked;
+  basicMode = basicModeToggle.checked;
 
   showQuestion();
 };
@@ -606,7 +966,6 @@ if (
 
 
 function startTimer() {
-  timeLeft = 30;
   timerEl.textContent = `Time left: ${timeLeft}s`;
 
   const wrapper = document.querySelector(".effect-wrapper");
@@ -621,7 +980,7 @@ function startTimer() {
     timerEl.textContent = `Time left: ${timeLeft}s`;
 
 if (!basicMode) {
-  const scale = 1 + (30 - timeLeft) * 0.02;
+  const scale = 1 + (60 - timeLeft) * 0.02;
   wrapper.style.setProperty("--zoom", scale.toFixed(2));
   wrapper.style.transform = `scale(${scale.toFixed(2)})`;
 
@@ -710,6 +1069,7 @@ const skipBtn = document.getElementById("skip-btn");
 
 skipBtn.onclick = () => {
   clearInterval(timer); // stop timer
+  timeLeft = 60; // set timer to original value
   current++;            // move to next question
   if (current < selectedQuestions.length) {
     showQuestion();     // show next question immediately
@@ -780,6 +1140,7 @@ function showResult() {
 }
 
 nextBtn.onclick = () => {
+  timeLeft = 60; // set timer to original value
   current++;
   if (current < selectedQuestions.length) {
     showQuestion();

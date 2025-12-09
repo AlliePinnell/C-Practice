@@ -9,25 +9,33 @@
 <body>
   <div id="copilot-brand">
   <img src="copilot-logo.png" alt="Copilot Logo" />
-</div>
 
+</div>
   <!-- ✅ Start screen for name input -->
   <div id="start-screen">
     <div class="container">
-      <h2>Welcome to the C++ Quiz Challenge<span id="live-name"></span></h2>
+      <h2>Welcome to the C++ Final Challenge <h1>2x2!...</h1><h2 id="live-name"></h2></h2>
       <label for="player-name">Enter your name:</label>
       <input type="text" id="player-name" />
       <label for="question-count">How many questions?</label>
       <select id="question-count">
+        <option value="10">10</option>
         <option value="20">20</option>
         <option value="40">40</option>
         <option value="60">60</option>
         <option value="80">80</option>
-        <option value="100">100</option>
+        <option value="88">All (88)</option>
       </select>
       <label>
-  <input type="checkbox" id="basic-mode-toggle" />
-  Enable Basic Mode (no zoom or shake - intended for mobile users)
+  <input type="checkbox" id="basic-mode-toggle" /> Enable Basic Mode (no zoom or shake - intended for mobile users)
+
+  <label for="theme-select">Theme:</label>
+  <select id="theme-select">
+    <option value="default">Default</option>
+    <option value="demonic">Demonic Red</option>
+    <option value="maziar">Magical Maziar</option>
+  </select>
+
 </label>
 
       <button id="start-btn">Start Quiz</button>
@@ -64,6 +72,31 @@
       </div>
     </div>
   </div>
+
+   <div id="sparkle-layer"></div>
+<div id="fire-layer">
+  <!-- Flames -->
+  <div class="fire"></div>
+  <div class="fire"></div>
+  <div class="fire"></div>
+  <div class="fire"></div>
+  <div class="fire"></div>
+  <div class="fire"></div>
+  <div class="fire"></div>
+  <div class="fire"></div>
+  <div class="fire"></div>
+  <div class="fire"></div>
+  
+  <!-- Smoke -->
+  <div class="smoke"></div>
+  <div class="smoke"></div>
+  <div class="smoke"></div>
+  <div class="smoke"></div>
+  <div class="smoke"></div>
+  <div class="smoke"></div>
+</div>
+
+
 
   <script src="script.js"></script>
 </body>

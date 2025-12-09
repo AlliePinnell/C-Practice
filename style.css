@@ -1,34 +1,113 @@
-/* Base layout */
+/* ============================= */
+/*        THEME VARIABLES        */
+/* ============================= */
+
+:root {
+  --bg-color: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-color: #e2e8f0;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --option-bg: #334155;
+  --option-hover: #475569;
+  --correct: #22c55e;
+  --incorrect: #ef4444;
+  --warning: #facc15;
+  --container-shadow: rgba(0, 0, 0, 0.4);
+  --banner-bg: #ef4444;
+  --transition-speed: 0.6s;
+}
+
+/* Default Theme */
+.theme-default {
+  --bg-color: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-color: #e2e8f0;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --option-bg: #334155;
+  --option-hover: #475569;
+  --correct: #22c55e;
+  --incorrect: #ef4444;
+  --warning: #facc15;
+  --container-shadow: rgba(0, 0, 0, 0.4);
+  --banner-bg: #ef4444;
+}
+
+/* Demonic Red Theme */
+.theme-demonic {
+  --bg-color: #1a0000;
+  --bg-secondary: #330000;
+  --text-color: #ffcccc;
+  --text-light: #ff9999;
+  --accent: #ff1a1a;
+  --accent-hover: #cc0000;
+  --option-bg: #4d0000;
+  --option-hover: #660000;
+  --correct: #ff3333;
+  --incorrect: #990000;
+  --warning: #ff4444;
+  --container-shadow: rgba(255, 0, 0, 0.3);
+  --banner-bg: #cc0000;
+}
+
+/* Magical Maziar Theme */
+.theme-maziar {
+  --bg-color: #0d0024;
+  --bg-secondary: #1a003d;
+  --text-color: #e5d9ff;
+  --text-light: #c1b3ff;
+  --accent: #8a2be2;
+  --accent-hover: #6b1bb8;
+  --option-bg: #2a0a4a;
+  --option-hover: #3a1164;
+  --correct: #6ee7b7;
+  --incorrect: #f472b6;
+  --warning: #c084fc;
+  --container-shadow: rgba(168, 85, 247, 0.4);
+  --banner-bg: #8a2be2;
+}
+
+/* ============================= */
+/*          BASE LAYOUT          */
+/* ============================= */
+
 html {
   font-family: 'Segoe UI', sans-serif;
 }
+
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  color: #e2e8f0;
+  background: var(--bg-color);
+  color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  position: relative; /* required so fixed theme layers visually sit behind content */
 }
 
 /* Container */
 .container {
-  background: #1e293b;
+  background: var(--bg-secondary);
   border-radius: 16px;
   padding: 40px;
   max-width: 700px;
   width: 90%;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 30px var(--container-shadow);
   transition: transform 0.3s ease;
+  position: relative;  /* ensure container sits above the theme layers */
+  z-index: 1;
 }
 
 /* Header */
 h1 {
   text-align: center;
   font-size: 2em;
-  color: white;
+  color: var(--text-color);
   margin-bottom: 20px;
 }
 
@@ -37,14 +116,14 @@ h1 {
   text-align: center;
   font-size: 1.1em;
   margin-bottom: 20px;
-  color: #94a3b8;
+  color: var(--text-light);
 }
 
 /* Question */
 #question {
   font-size: 1.2em;
   margin-bottom: 20px;
-  color: #f1f5f9;
+  color: var(--text-color);
   transition: transform 0.3s ease;
 }
 
@@ -55,7 +134,7 @@ h1 {
 }
 
 #options li {
-  background: #334155;
+  background: var(--option-bg);
   margin: 10px 0;
   padding: 14px;
   border-radius: 8px;
@@ -64,19 +143,19 @@ h1 {
 }
 
 #options li:hover {
-  background: #475569;
+  background: var(--option-hover);
   transform: scale(1.02);
 }
 
 /* Feedback */
 .correct {
-  background-color: #22c55e !important;
-  color: #f0fdf4;
+  background-color: var(--correct) !important;
+  color: white;
 }
 
 .incorrect {
-  background-color: #ef4444 !important;
-  color: #fef2f2;
+  background-color: var(--incorrect) !important;
+  color: white;
 }
 
 /* Buttons */
@@ -85,7 +164,7 @@ button {
   margin: 30px auto 0;
   padding: 12px 24px;
   font-size: 16px;
-  background: linear-gradient(to right, #3b82f6, #6366f1);
+  background: linear-gradient(to right, var(--accent), var(--accent-hover));
   color: white;
   border: none;
   border-radius: 8px;
@@ -94,7 +173,7 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(to right, #2563eb, #4f46e5);
+  background: linear-gradient(to right, var(--accent-hover), var(--accent));
   transform: scale(1.05);
 }
 
@@ -105,7 +184,7 @@ button:hover {
 
 #score {
   font-size: 1.5em;
-  color: #facc15;
+  color: var(--warning);
   margin: 10px 0;
 }
 
@@ -114,34 +193,34 @@ button:hover {
   display: none;
 }
 
+/* Follow-up box */
 #follow-up-box {
   margin-top: 20px;
   padding: 16px;
-  background: #0f172a;
-  border: 1px solid #334155;
+  background: var(--bg-color);
+  border: 1px solid var(--option-bg);
   border-radius: 12px;
-  color: #94a3b8;
+  color: var(--text-light);
   text-align: center;
   font-size: 1em;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 10px var(--container-shadow);
 }
 
+/* Zoom pulse */
 @keyframes zoomPulse {
   0% { transform: scale(1); }
   100% { transform: scale(1.5); }
 }
 
-/* Zoom + Shake wrapper */
+/* Zoom wrapper */
 .effect-wrapper {
   transition: transform 0.3s ease;
   transform-origin: center center;
 }
 
-/* Zoom effect */
 .effect-wrapper.zoomed {
   transform: scale(1.2);
 }
-
 
 /* Time’s up banner */
 #times-up-banner {
@@ -152,11 +231,11 @@ button:hover {
   font-size: 2em;
   font-weight: bold;
   color: white;
-  background: #ef4444;
+  background: var(--banner-bg);
   padding: 20px 40px;
   border-radius: 12px;
   z-index: 999;
-  animation: slideAcross 2.5s ease forwards; /* ⏱️ longer duration */
+  animation: slideAcross 2.5s ease forwards;
 }
 
 @keyframes slideAcross {
@@ -179,11 +258,12 @@ button:hover {
   100% { transform: translate(0, 0) scale(var(--zoom, 1)); }
 }
 
+/* End / Skip buttons */
 #end-btn {
   margin-left: 10px;
   padding: 8px 16px;
   font-size: 1rem;
-  background-color: #c62828;
+  background-color: var(--incorrect);
   color: white;
   border: none;
   border-radius: 4px;
@@ -201,6 +281,7 @@ button:hover {
   cursor: pointer;
 }
 
+/* Player display */
 #player-display {
   font-size: 1.1rem;
   margin-top: -10px;
@@ -208,12 +289,14 @@ button:hover {
   text-align: center;
 }
 
+/* Question count */
 #question-count {
   margin-top: 8px;
   padding: 6px;
   font-size: 1rem;
 }
 
+/* Question number */
 .question-number {
   font-size: 1.1rem;
   margin-bottom: 10px;
@@ -221,6 +304,7 @@ button:hover {
   text-align: center;
 }
 
+/* Copilot brand */
 #copilot-brand {
   position: absolute;
   top: 10px;
@@ -230,7 +314,7 @@ button:hover {
   gap: 8px;
   font-size: 1.2rem;
   font-weight: normal;
-  color: white;
+  color: var(--text-color);
   z-index: -1000;
 }
 
@@ -239,6 +323,7 @@ button:hover {
   height: 100%;
 }
 
+/* Disable shake on mobile */
 @media (max-width: 768px) {
   .shake {
     animation: none !important;
@@ -246,10 +331,14 @@ button:hover {
   }
 }
 
+/* ============================= */
+/*        START SCREEN CSS       */
+/* ============================= */
+
 #start-screen .container {
   padding: 30px 40px;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px var(--container-shadow);
   max-width: 400px;
   width: 90%;
   text-align: center;
@@ -258,6 +347,7 @@ button:hover {
 #start-screen h2 {
   margin-bottom: 20px;
   font-size: 1.4rem;
+  color: var(--text-color);
 }
 
 #start-screen label {
@@ -265,6 +355,7 @@ button:hover {
   margin-top: 15px;
   margin-bottom: 5px;
   text-align: left;
+  color: var(--text-light);
 }
 
 #start-screen input[type="text"],
@@ -272,16 +363,18 @@ button:hover {
   width: 60%;
   padding: 10px;
   font-size: 1rem;
-
   border-radius: 6px;
   margin-bottom: 10px;
+  background: var(--option-bg);
+  color: var(--text-color);
+  border: 1px solid var(--option-hover);
 }
 
 #start-screen button {
   margin-top: 20px;
   padding: 12px 20px;
   font-size: 1rem;
-  background-color: #4a90e2;
+  background-color: var(--accent);
   color: white;
   border: none;
   border-radius: 6px;
@@ -290,7 +383,7 @@ button:hover {
 }
 
 #start-screen button:hover {
-  background-color: #357bd8;
+  background-color: var(--accent-hover);
 }
 
 #start-screen input[type="checkbox"] {
@@ -303,5 +396,171 @@ button:hover {
   justify-content: left;
   margin-top: 10px;
   font-size: 0.95rem;
-  color: #555;
+  color: var(--text-light);
 }
+#start-screen label[for="theme-select"] {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  text-align: left;
+  color: var(--text-light);
+}
+
+/* ============================= */
+/*       THEME EFFECT LAYERS     */
+/* ============================= */
+
+/* ensure smooth transitions for theme switching */
+body,
+.container,
+.effect-wrapper,
+#options li,
+button,
+#follow-up-box,
+#times-up-banner {
+  transition: background var(--transition-speed) ease,
+              color var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease,
+              border-color var(--transition-speed) ease;
+}
+
+/* theme layer base (holds fire and sparkles) */
+.theme-layer {
+  position: fixed;
+  pointer-events: none;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* sits behind UI but above page background */
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+/* ------------------ MAGICAL SPARKLES ------------------ */
+
+/* sparkles container (initially hidden) */
+#sparkle-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+/* show sparkles when maziar theme active */
+body.theme-maziar #sparkle-layer {
+  opacity: 1;
+}
+
+/* a single sparkle (style). JS can generate many .sparkle elements */
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffffee 0%, #bfbfffcc 40%, transparent 100%);
+  box-shadow: 0 0 10px rgba(180, 200, 255, 0.85), 0 0 20px rgba(138, 43, 226, 0.15);
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: sparkleRise linear infinite, sparklePulse ease-in-out infinite;
+}
+
+/* pulse effect */
+@keyframes sparklePulse {
+  0%   { opacity: 0; transform: scale(0.6); }
+  10%  { opacity: 1; transform: scale(1.15); }
+  60%  { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.6); }
+}
+
+/* float upward + slight sideways drift */
+@keyframes sparkleRise {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    filter: blur(0px);
+  }
+  100% {
+    transform: translateY(-220px) translateX(40px) rotate(20deg);
+    filter: blur(1px);
+  }
+}
+
+/* variance helpers (if JS doesn't set durations, CSS provides defaults) */
+.sparkle.small   { width: 4px; height: 4px; animation-duration: 3s;  animation-delay: 0s;  opacity: 0.9; }
+.sparkle.medium  { width: 6px; height: 6px; animation-duration: 4.5s; animation-delay: 0.2s; opacity: 0.95; }
+.sparkle.large   { width: 10px; height: 10px; animation-duration: 6s; animation-delay: 0.4s; opacity: 0.95; }
+
+/* ============================= */
+/*        DEMONIC FIRE LAYER     */
+/* ============================= */
+#fire-layer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  pointer-events: none;
+  z-index: 9999;
+  display: none; /* only visible in demonic theme */
+  overflow: visible;
+}
+
+/* Flames */
+.fire {
+  position: absolute;
+  bottom: 0;
+  width: 10px;
+  height: 60px;
+  background: linear-gradient(to top, #ffcc00, #ff6600, #ff0000, #990000);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  opacity: 0.7;
+  animation: flicker 1s infinite ease-in-out;
+  mix-blend-mode: screen;
+}
+
+/* Flame flicker */
+@keyframes flicker {
+  0%   { transform: translateY(0) scaleX(1) scaleY(1); opacity: 0.5; }
+  25%  { transform: translateY(-10px) scaleX(1.1) scaleY(1.2); opacity: 0.8; }
+  50%  { transform: translateY(-25px) scaleX(0.9) scaleY(1.1); opacity: 0.9; }
+  75%  { transform: translateY(-15px) scaleX(1.05) scaleY(1.15); opacity: 0.7; }
+  100% { transform: translateY(0) scaleX(1) scaleY(1); opacity: 0.5; }
+}
+
+/* Smoke wisps */
+.smoke {
+  position: absolute;
+  bottom: 80px;
+  width: 10px;
+  height: 50px;
+  background: radial-gradient(ellipse at center, rgba(200,200,200,0.2) 0%, rgba(200,200,200,0) 70%);
+  border-radius: 50%;
+  animation: rise linear infinite;
+  opacity: 0.5;
+}
+
+/* Smoke rising animation */
+@keyframes rise {
+  0%   { transform: translateY(0) scale(1); opacity: 0.5; }
+  50%  { transform: translateY(-50px) scale(1.2); opacity: 0.3; }
+  100% { transform: translateY(-120px) scale(1.5); opacity: 0; }
+}
+
+/* Show fire only in demonic theme */
+body.theme-demonic #fire-layer {
+  display: block;
+}
+
+
+/* ------------------ Accessibility / Mobile considerations ------------------ */
+
+/* reduce heavy effects on small screens */
+@media (max-width: 768px) {
+  #sparkle-layer, #fire-layer { opacity: 0.9; }
+  .sparkle { display: none; } /* optionally hide many sparkles on mobile to conserve CPU */
+  #fire-layer { height: 120px; }
+}
+
+/* keep layers behind UI but above page background; if you need to bring them further back adjust z-index */
