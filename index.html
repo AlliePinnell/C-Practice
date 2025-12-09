@@ -17,15 +17,39 @@
       <h2>Welcome to the C++ Final Challenge <h1>2x2!...</h1><h2 id="live-name"></h2></h2>
       <label for="player-name">Enter your name:</label>
       <input type="text" id="player-name" />
-      <label for="question-count">How many questions?</label>
-      <select id="question-count">
+        <!-- NEW MODE SELECTOR -->
+        <label for="mode-select">Mode:</label>
+        <select id="mode-select">
+        <option value="questions">Questions</option>
+        <option value="chapter">Chapter Selection</option>
+        </select>
+
+
+        <label for="question-count" id="question-count-label">How many questions?</label>
+        <select id="question-count">
         <option value="10">10</option>
         <option value="20">20</option>
         <option value="40">40</option>
         <option value="60">60</option>
         <option value="80">80</option>
         <option value="88">All (88)</option>
-      </select>
+        </select>
+
+
+        <!-- CHAPTER SELECT -->
+        <label id="chapter-label" class="hidden" for="chapter-select">Select Chapter:</label>
+        <select id="chapter-select" class="hidden">
+        <option value="1">Chapter 1</option>
+        <option value="3">Chapter 3</option>
+        <option value="4">Chapter 4</option>
+        <option value="5">Chapter 5</option>
+        <option value="6">Chapter 6</option>
+        <option value="7">Chapter 7</option>
+        <option value="8">Chapter 8</option>
+        <option value="13">Chapter 13</option>
+        <option value="14">Chapter 14</option>
+        <option value="Type of Error">Type of Error</option>
+        </select>
       <label>
   <input type="checkbox" id="basic-mode-toggle" /> Enable Basic Mode (no zoom or shake - intended for mobile users)
 
@@ -47,7 +71,7 @@
 
   <div class="effect-wrapper hidden">
     <div class="container">
-      <h1>C++ Quiz Challenge</h1>
+      <h1>C++ Quiz Challenge V2</h1>
       <p id="player-display" class="hidden"></p>
       <div id="timer"></div>
 

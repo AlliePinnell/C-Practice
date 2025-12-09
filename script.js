@@ -8,6 +8,21 @@ const questionCountSelect = document.getElementById("question-count");
 let totalQuestions = 20; // default
 const questionNumberEl = document.getElementById("question-number");
 
+const modeSelect = document.getElementById("mode-select");
+const chapterSelect = document.getElementById("chapter-select");
+
+
+// Toggle visibility
+modeSelect?.addEventListener("change", () => {
+if (modeSelect.value === "chapter") {
+questionCountSelect.classList.add("hidden");
+chapterSelect.classList.remove("hidden");
+} else {
+chapterSelect.classList.add("hidden");
+questionCountSelect.classList.remove("hidden");
+}
+});
+
 // Theme Switching
 const themeSelect = document.getElementById("theme-select");
 
@@ -306,7 +321,7 @@ const questionPool = [
     },
     // ---------------- CHAPTER 3: IF / SWITCH ----------------
     {
-        question: `[Chapter 3] What is the output of this code?\n\nint x = 3;\nint y = 4;\nif (x > y)\n    cout << "A";\nelse if (x == y)\n    cout << "B";\nelse\n    cout << "C";`,
+        question: `[Chapter 3] What is the output of this code?\n\nint x = 3;\nint y = 4;\nif (x > y)\n    cout << "A";\nelse if (x == y)\n    cout << "B";\nelse\n    cout << "C";C`,
         options: ["A", "B", "C", "No output"],
         answer: 2
     },
@@ -323,88 +338,56 @@ const questionPool = [
 
     // ---------------- CHAPTER 4: LOOPS ----------------
     {
-        question: `[Chapter 4] Guess the output:\n\nint a = 5;\nwhile (a > 0) {\n  cout << a << " ";\n  a--;\n}`,
+        question: `[Chapter 4] Guess the output:\n\nint a = 5;\nwhile (a > 0) {\n  cout << a << " ";\n  a--;\n}C`,
         options: ["5 4 3 2 1", "4 3 2 1 0", "5 4 3 2", "Infinite loop"],
         answer: 0
     },
     {
-        question: `[Chapter 4] What does this print?\n\nfor (int i = 0; i < 3; ++i)\n  cout << i << " ";`,
+        question: `[Chapter 4] What does this print?\n\nfor (int i = 0; i < 3; ++i)\n  cout << i << " ";C`,
         options: ["1 2 3", "0 1 2", "0 1 2 3", "1 2"],
         answer: 1
     },
     {
-        question: `[Chapter 4] Output of the nested loop:\n\nfor (int i = 1; i <= 2; ++i)\n  for (int j = 1; j <= 3; ++j)\n    cout << i << j << " ";`,
+        question: `[Chapter 4] Output of the nested loop:\n\nfor (int i = 1; i <= 2; ++i)\n  for (int j = 1; j <= 3; ++j)\n    cout << i << j << " ";C`,
         options: ["11 12 13 21 22 23", "12 13 21 22 23", "11 22 33", "123123"],
         answer: 0
     },
     {
-        question: `[Chapter 4] What is displayed?\n\nint total = 0;\nfor (int i = 1; i <= 4; ++i)\n  total += i;\ncout << total;`,
+        question: `[Chapter 4] What is displayed?\n\nint total = 0;\nfor (int i = 1; i <= 4; ++i)\n  total += i;\ncout << total;C`,
         options: ["4", "10", "6", "0"],
         answer: 1
     },
     {
-        question: `[Chapter 4] Guess the output:\n\nint x = 1;\ndo {\n  cout << x << " ";\n  ++x;\n} while (x < 4);`,
+        question: `[Chapter 4] Guess the output:\n\nint x = 1;\ndo {\n  cout << x << " ";\n  ++x;\n} while (x < 4);C`,
         options: ["1 2 3", "1 2 3 4", "0 1 2", "Infinite loop"],
         answer: 0
     },
     {
-        question: `[Chapter 4] What happens here?\n\nfor (int i = 1; i <= 5; ++i) {\n  if (i == 3) continue;\n  cout << i << " ";\n}`,
+        question: `[Chapter 4] What happens here?\n\nfor (int i = 1; i <= 5; ++i) {\n  if (i == 3) continue;\n  cout << i << " ";\n}C`,
         options: ["1 2 3 4 5", "1 2 4 5", "1 2", "1 2 3"],
         answer: 1
     },
 
     // ---------------- CHAPTER 5: I/O STREAMS ----------------
     {
-        question: `[Chapter 5] What is the output?\n\ndouble d = 3.14159;\ncout << fixed << setprecision(2) << d;`,
+        question: `[Chapter 5] What is the output?\n\ndouble d = 3.14159;\ncout << fixed << setprecision(2) << d;C`,
         options: ["3.14", "3.1", "3.142", "3"],
         answer: 0
     },
     {
-        question: `[Chapter 5] Predict the output:\n\ncout << setw(5) << 42 << setw(5) << 7;`,
+        question: `[Chapter 5] Predict the output:\n\ncout << setw(5) << 42 << setw(5) << 7;C`,
         options: ["42---7", "42-7", "---42---7", "427"],
         answer: 2
     },
-
-    // ---------------- CHAPTER 6: STRINGS ----------------
-    {
-        question: `[Chapter 6] What is displayed?\n\nstring s = "Hello";\ncout << s.substr(1, 3);`,
-        options: ["Hel", "ell", "llo", "He"],
-        answer: 1
-    },
-    {
-        question: `[Chapter 6] What is printed?\n\nstring s = "C++";\nfor (int i = s.size() - 1; i >= 0; --i)\n  cout << s[i];`,
-        options: ["C++", "++C", "C+", "Error"],
-        answer: 1
-    },
-    {
-        question: `[Chapter 6] What does this output?\n\nint i = 3;\ncout << i++ << " ";\n\ncout << ++i;`,
-        options: ["3 4", "3 5", "4 5", "Error"],
-        answer: 1
-    },
-    {
-        question: `[Chapter 6] What is displayed?\n\nvector<int> nums {2, 4, 6};\nfor (int n : nums)\n  cout << n * 2 << " ";`,
-        options: ["2 4 6", "4 8 12", "8 16 24", "Error"],
-        answer: 1
-    },
-    {
-        question: `[Chapter 6] What will this display?\n\nint x = 10;\nif (x > 5)\n  if (x > 15)\n    cout << "A";\n  else\n    cout << "B";\nelse\n  cout << "C";`,
-        options: ["A", "B", "C", "No output"],
-        answer: 1
-    },
-    {
-        question: `[Chapter 6] Predict the output:\n\ncout << (3 < 2 || 5 > 4 && 2 < 1);`,
-        options: ["1", "0", "true", "false"],
-        answer: 1
-    },
-    {
-        question: `[Chapter 6] What will be printed?\n\nint i = 1;\nwhile (i <= 3) {\n  cout << i++ << " ";\n}`,
-        options: ["1 2 3", "0 1 2", "1 2", "1 2 3 4"],
-        answer: 0
-    },
-    {
+        {
         question: "[Chapter 5] What does cin.fail() return if the last input operation failed?",
         options: ["true", "false", "0", "It throws an exception"],
         answer: 0
+    },
+        {
+        question: "[Chapter 5] What is a common cause of infinite loops when using cin in a loop?",
+        options: ["Using cin.ignore() too early", "Failing to clear the error state after invalid input", "Using endl instead of '\\n'", "Using setprecision() incorrectly"],
+        answer: 1
     },
     {
         question: "[Chapter 5] What is the purpose of cin.clear()?",
@@ -426,6 +409,43 @@ const questionPool = [
         options: ["cin.clear(); cin.ignore();", "cin.ignore(); cin.clear();", "cin.fail(); cin.clear();", "cin.clear(); cin.get();"],
         answer: 0
     },
+
+    // ---------------- CHAPTER 6: STRINGS ----------------
+    {
+        question: `[Chapter 6] What is displayed?\n\nstring s = "Hello";\ncout << s.substr(1, 3);C`,
+        options: ["Hel", "ell", "llo", "He"],
+        answer: 1
+    },
+    {
+        question: `[Chapter 6] What is printed?\n\nstring s = "C++";\nfor (int i = s.size() - 1; i >= 0; --i)\n  cout << s[i];C`,
+        options: ["C++", "++C", "C+", "Error"],
+        answer: 1
+    },
+    {
+        question: `[Chapter 6] What does this output?\n\nint i = 3;\ncout << i++ << " ";\n\ncout << ++i;C`,
+        options: ["3 4", "3 5", "4 5", "Error"],
+        answer: 1
+    },
+    {
+        question: `[Chapter 6] What is displayed?\n\nvector<int> nums {2, 4, 6};\nfor (int n : nums)\n  cout << n * 2 << " ";C`,
+        options: ["2 4 6", "4 8 12", "8 16 24", "Error"],
+        answer: 1
+    },
+    {
+        question: `[Chapter 6] What will this display?\n\nint x = 10;\nif (x > 5)\n  if (x > 15)\n    cout << "A";\n  else\n    cout << "B";\nelse\n  cout << "C";C`,
+        options: ["A", "B", "C", "No output"],
+        answer: 1
+    },
+    {
+        question: `[Chapter 6] Predict the output:\n\ncout << (3 < 2 || 5 > 4 && 2 < 1);C`,
+        options: ["1", "0", "true", "false"],
+        answer: 1
+    },
+    {
+        question: `[Chapter 6] What will be printed?\n\nint i = 1;\nwhile (i <= 3) {\n  cout << i++ << " ";\n}C`,
+        options: ["1 2 3", "0 1 2", "1 2", "1 2 3 4"],
+        answer: 0
+    },
     {
         question: "[Chapter 6] What happens if you call v.at(10) on a vector with only 5 elements?",
         options: ["Returns 0", "Returns garbage", "Throws an out_of_range exception", "Returns the last element"],
@@ -445,11 +465,6 @@ const questionPool = [
         question: "[Chapter 6] What should you check before calling substr(pos, len) on a string?",
         options: ["That pos is less than the string's length", "That len is greater than 0", "That the string is empty", "That pos is a multiple of len"],
         answer: 0
-    },
-    {
-        question: "[Chapter 5] What is a common cause of infinite loops when using cin in a loop?",
-        options: ["Using cin.ignore() too early", "Failing to clear the error state after invalid input", "Using endl instead of '\\n'", "Using setprecision() incorrectly"],
-        answer: 1
     },
   // ---------------- CHAPTER 7 ----------------
   {
@@ -502,6 +517,206 @@ const questionPool = [
     ],
     answer: 2
   },
+      {
+        question: "[Chapter 7] What is the purpose of a function prototype?",
+        options: [
+            "To define the body of a function",
+            "To declare a function before it’s used",
+            "To automatically optimize a function",
+            "To create a new namespace"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 7] Which term refers to the area of a program where a variable can be used?",
+        options: [
+            "Hierarchy",
+            "Lifetime",
+            "Scope",
+            "Declaration"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 7] What is the syntax for defining a function?",
+        options: [
+            "function return_type(arguments) { }",
+            "def function(arguments):",
+            "return_type function_name(parameters) { }",
+            "function_name return_type(parameters);"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 7] What type of variable exists only inside a function?",
+        options: [
+            "Static variable",
+            "Global variable",
+            "Constant variable",
+            "Local variable"
+        ],
+        answer: 3
+    },
+    {
+        question: "[Chapter 7] What is a hierarchy chart used for?",
+        options: [
+            "Showing the order of precedence",
+            "Visualizing function relationships",
+            "Displaying program output",
+            "Tracking memory usage"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 7] Which parameter type allows a function to modify the argument variable?",
+        options: [
+            "Value parameter",
+            "Reference parameter",
+            "Constant parameter",
+            "Pointer parameter only"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 7] Why can reference parameters improve efficiency?",
+        options: [
+            "They copy the entire object",
+            "They avoid copying large objects",
+            "They require more memory",
+            "They prevent recursion"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 7] What is an include guard used for?",
+        options: [
+            "To prevent global variables from changing",
+            "To prevent a header file from being included multiple times",
+            "To hide private functions",
+            "To protect memory from overflow"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 7] Which of the following SHOULD NOT be placed in a header file?",
+        options: [
+            "Function prototypes",
+            "Class declarations",
+            "Using namespace directives",
+            "Include guards"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 7] What keyword defines a namespace?",
+        options: [
+            "scope",
+            "group",
+            "namespace",
+            "module"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 7] How do you access a function inside a namespace without using 'using namespace'?",
+        options: [
+            "functionName::namespace()",
+            "namespace.functionName()",
+            "namespace::functionName()",
+            "Call with parentheses only"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 7] What is a function signature?",
+        options: [
+            "The return value only",
+            "The combination of a function name and its parameter list",
+            "A hash of the function body",
+            "A description comment above the function"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 7] Which is TRUE about global variables?",
+        options: [
+            "They should be used frequently",
+            "They increase program safety",
+            "They can be accessed from anywhere",
+            "They are always constant"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 7] What happens if a local variable has the same name as a global variable?",
+        options: [
+            "The global variable is deleted",
+            "The local variable overwrites the global value",
+            "The global variable is renamed automatically",
+            "The local variable shadows the global variable"
+        ],
+        answer: 3
+    },
+    {
+        question: "[Chapter 7] Which file typically contains the *definitions* of functions?",
+        options: [
+            "main.cpp",
+            "header (.h) files",
+            "implementation (.cpp) files",
+            "namespace files"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 7] What is the purpose of default parameter values?",
+        options: [
+            "To overload functions automatically",
+            "To allow functions to be declared without prototypes",
+            "To allow calls that omit some arguments",
+            "To skip validation"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 7] When storing functions in header files, why are they often put inside namespaces?",
+        options: [
+            "To shorten the code",
+            "To prevent naming conflicts",
+            "To avoid prototypes",
+            "To improve runtime speed"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 7] What type of variable should generally NOT be used?",
+        options: [
+            "Constant",
+            "Local",
+            "Global",
+            "Reference"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 7] What is the correct way to declare a function?",
+        options: [
+            "function name(parameters)",
+            "return_type name(parameters);",
+            "declare return_type name()",
+            "void(name)"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 7] The statement `#ifndef FILE_H` in a header file is part of:",
+        options: [
+            "A preprocessor loop",
+            "An include guard",
+            "A namespace",
+            "A compiler directive for optimization"
+        ],
+        answer: 1
+    },
 
   // ---------------- CHAPTER 8 ----------------
   {
@@ -554,6 +769,206 @@ const questionPool = [
     ],
     answer: 2
   },
+      {
+        question: "[Chapter 8] What is the primary goal of testing a program?",
+        options: [
+            "To optimize performance",
+            "To find all errors before the program is released",
+            "To improve code formatting",
+            "To reduce file size"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 8] What is the main goal of debugging?",
+        options: [
+            "To write new features",
+            "To find syntax errors",
+            "To fix errors found during testing",
+            "To remove unused code"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 8] Which type of error is caught BEFORE running the program?",
+        options: [
+            "Logic error",
+            "Runtime error",
+            "Compile-time error",
+            "Data error"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 8] Which type of error produces incorrect results but does NOT crash the program?",
+        options: [
+            "Runtime error",
+            "Compilation error",
+            "Logic error",
+            "Syntax error"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 8] Which tool can you use to trace program execution?",
+        options: [
+            "cin",
+            "cout statements",
+            "linker",
+            "compiler"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 8] When testing with invalid data, what is the purpose?",
+        options: [
+            "To generate warnings",
+            "To intentionally crash the program",
+            "To ensure the program handles incorrect input safely",
+            "To test compiler performance"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 8] What happens when the user enters the wrong data type, such as 'ten' for an integer?",
+        options: [
+            "The program skips the rest of the code",
+            "The program produces a syntax error",
+            "The program extracts no valid value and sets failbit",
+            "The program automatically converts it"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 8] Which Visual Studio feature pauses the program at a specific line?",
+        options: [
+            "Watch window",
+            "Breakpoint",
+            "Stack trace",
+            "Code formatter"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 8] What is stepping through code used for?",
+        options: [
+            "Running the entire program quickly",
+            "Executing one statement at a time for inspection",
+            "Formatting source code",
+            "Compiling multiple files"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 8] Which type of error occurs when the program is running?",
+        options: [
+            "Compile-time error",
+            "Logic error",
+            "Runtime error",
+            "Syntax error"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 8] What is the first phase in a typical testing plan?",
+        options: [
+            "Test with invalid data",
+            "Check the user interface",
+            "Debug with breakpoints",
+            "Deploy the program"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 8] What does a breakpoint allow you to do?",
+        options: [
+            "Skip over functions",
+            "Pause program execution at a specific line",
+            "Generate more compiler warnings",
+            "Automatically fix errors"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 8] What is a common problem associated with floating-point numbers?",
+        options: [
+            "They always round incorrectly",
+            "They cannot represent integers",
+            "They can produce slight precision errors",
+            "They crash the program automatically"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 8] Which technique helps diagnose where a program is failing?",
+        options: [
+            "Removing comments",
+            "Using cout for tracing",
+            "Disabling input validation",
+            "Recompiling repeatedly"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 8] What does the stack trace show?",
+        options: [
+            "Memory addresses only",
+            "The sequence of function calls",
+            "All variables in the program",
+            "Compiler errors only"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 8] Which error type is demonstrated by forgetting to close a parenthesis?",
+        options: [
+            "Runtime error",
+            "Logic error",
+            "Compile-time (syntax) error",
+            "Floating-point error"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 8] What is the recommended final step after debugging?",
+        options: [
+            "Refactor code",
+            "Deploy the program",
+            "Delete all testing data",
+            "Rewrite all functions"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 8] Which testing phase tries to deliberately break the program?",
+        options: [
+            "Valid input testing",
+            "Invalid data testing",
+            "Interface testing",
+            "Debugging"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 8] Which type of error occurs when a value is valid syntax but logically incorrect?",
+        options: [
+            "Runtime error",
+            "Logical error",
+            "Grammar error",
+            "Input error"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 8] What feature allows you to inspect variables while paused at a breakpoint?",
+        options: [
+            "Debugger watch/locals window",
+            "Compiler options",
+            "Project settings",
+            "Trace log"
+        ],
+        answer: 0
+    },
 
   // ---------------- CHAPTER 13 ----------------
   {
@@ -606,6 +1021,206 @@ const questionPool = [
     ],
     answer: 1
   },
+      {
+        question: "[Chapter 13] What is an exception in C++?",
+        options: [
+            "A syntax error detected during compilation",
+            "A mechanism for handling unexpected or invalid conditions",
+            "A type of data structure",
+            "A compiler optimization"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 13] Which class is at the top of the C++ exception hierarchy?",
+        options: [
+            "invalid_argument",
+            "runtime_error",
+            "exception",
+            "logic_error"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 13] Which exception class is typically thrown when a function receives an invalid argument?",
+        options: [
+            "invalid_argument",
+            "overflow_error",
+            "range_error",
+            "runtime_error"
+        ],
+        answer: 0
+    },
+    {
+        question: "[Chapter 13] Which keyword is used to trigger an exception?",
+        options: [
+            "throw",
+            "raise",
+            "error",
+            "catch"
+        ],
+        answer: 0
+    },
+    {
+        question: "[Chapter 13] What is the purpose of a try block?",
+        options: [
+            "To declare exception objects",
+            "To test expressions for truth",
+            "To wrap code that may throw an exception",
+            "To convert warnings into errors"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 13] What function of an exception object returns the error message?",
+        options: [
+            "info()",
+            "why()",
+            "message()",
+            "what()"
+        ],
+        answer: 3
+    },
+    {
+        question: "[Chapter 13] What happens if an exception is thrown and not caught?",
+        options: [
+            "The compiler fixes it automatically",
+            "The program displays a warning but continues",
+            "The program terminates immediately",
+            "The exception is ignored"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 13] Why should you prevent exceptions from being thrown when possible?",
+        options: [
+            "They slow down compilation",
+            "They require rewriting the entire program",
+            "They cause programs to crash if uncaught",
+            "They make input validation impossible"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 13] Which statement correctly catches ALL standard exceptions?",
+        options: [
+            "catch(all)",
+            "catch(exception e)",
+            "catch(const exception& e)",
+            "catch(std_error)"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 13] Where should more specific catch clauses be placed?",
+        options: [
+            "Before general catch clauses",
+            "After general catch clauses",
+            "In any order",
+            "Outside the try block"
+        ],
+        answer: 0
+    },
+    {
+        question: "[Chapter 13] What is the purpose of rethrowing an exception?",
+        options: [
+            "To restart the program",
+            "To pass the exception to another catch block",
+            "To delete the exception",
+            "To prevent the exception from being handled"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 13] Which of the following is a subclass of logic_error?",
+        options: [
+            "overflow_error",
+            "invalid_argument",
+            "underflow_error",
+            "range_error"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 13] Which of these would likely throw a runtime_error?",
+        options: [
+            "Passing the wrong type to a function",
+            "Using a null pointer",
+            "Providing a negative array index",
+            "Misspelling a keyword"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 13] What is the primary benefit of exception handling?",
+        options: [
+            "It replaces all conditional checks",
+            "It separates normal logic from error-handling logic",
+            "It eliminates syntax errors",
+            "It automatically fixes input errors"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 13] What does the call stack represent?",
+        options: [
+            "All active variables in memory",
+            "A list of all exceptions thrown",
+            "The chain of function calls leading to the exception",
+            "The program's output buffer"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 13] What happens when a function throws an exception?",
+        options: [
+            "The nearest matching catch block handles it",
+            "The program immediately quits",
+            "The function continues normally",
+            "The compiler rewrites the function"
+        ],
+        answer: 0
+    },
+    {
+        question: "[Chapter 13] Which code example is recommended for handling invalid_argument exceptions?",
+        options: [
+            "try-catch block",
+            "goto statement",
+            "while(true) loop",
+            "assert()"
+        ],
+        answer: 0
+    },
+    {
+        question: "[Chapter 13] When should you create custom exception classes?",
+        options: [
+            "Whenever possible",
+            "Only when built-in exceptions don’t describe the error well",
+            "Only for file I/O",
+            "Never"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 13] What happens to local variables when an exception is thrown?",
+        options: [
+            "They persist indefinitely",
+            "They are automatically destroyed as stack frames unwind",
+            "They become global variables",
+            "They are saved for later use"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 13] Which of the following is TRUE about exception handling?",
+        options: [
+            "Exceptions must always be caught",
+            "Only one catch block is allowed",
+            "Exceptions propagate up the call stack until handled",
+            "Exceptions cannot be thrown from functions"
+        ],
+        answer: 2
+    },
 
   // ---------------- CHAPTER 14 ----------------
   {
@@ -658,108 +1273,358 @@ const questionPool = [
     ],
     answer: 0
   },
+      {
+        question: "[Chapter 14] What is a class in C++?",
+        options: [
+            "A function that stores data",
+            "A blueprint for creating objects",
+            "A type of namespace",
+            "A special type of array"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 14] What keyword is used to create an object from a class?",
+        options: [
+            "new",
+            "create",
+            "object",
+            "No keyword is required"
+        ],
+        answer: 3
+    },
+    {
+        question: "[Chapter 14] Which term refers to the variables inside a class?",
+        options: [
+            "Attributes (data members)",
+            "Constructors",
+            "Methods",
+            "Interfaces"
+        ],
+        answer: 0
+    },
+    {
+        question: "[Chapter 14] Which of the following is TRUE about constructors?",
+        options: [
+            "They must return an int",
+            "They have no return type",
+            "They must follow the name of the file",
+            "They must be public"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 14] What is the purpose of a constructor?",
+        options: [
+            "To destroy objects",
+            "To initialize an object when it is created",
+            "To overload operators",
+            "To compile class code"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 14] What is the keyword used to refer to the calling object inside a class?",
+        options: [
+            "self",
+            "this",
+            "caller",
+            "object"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 14] What is private encapsulation used for?",
+        options: [
+            "To allow global access",
+            "To hide implementation details",
+            "To slow down execution",
+            "To prevent object creation"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 14] What is a class method also called?",
+        options: [
+            "Data member",
+            "Function member",
+            "Static variable",
+            "Pointer function"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 14] Where are member function definitions usually stored?",
+        options: [
+            "In header files only",
+            "In .cpp implementation files",
+            "Inside main()",
+            "In namespaces only"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 14] What is the purpose of a destructor?",
+        options: [
+            "To copy an object",
+            "To destroy an object and free resources",
+            "To initialize class constants",
+            "To declare private variables"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 14] What symbol is used to define the scope of a class function?",
+        options: [
+            "->",
+            "::",
+            ":=",
+            "<>"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 14] What is the default access level for class members?",
+        options: [
+            "public",
+            "protected",
+            "private",
+            "global"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 14] What is an accessor function?",
+        options: [
+            "A function that modifies data",
+            "A function that retrieves data without changing it",
+            "A constructor with parameters",
+            "A destructor that cleans memory"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 14] What is a mutator function?",
+        options: [
+            "A function that deletes a variable",
+            "A function that changes a data member",
+            "A function that returns a constant reference",
+            "A function that overloads an operator"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 14] What is the purpose of a header file for a class?",
+        options: [
+            "To store data for runtime",
+            "To declare class definitions and member prototypes",
+            "To execute class functions",
+            "To replace .cpp files"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 14] Which function automatically gets called when an object goes out of scope?",
+        options: [
+            "constructor",
+            "destructor",
+            "copy constructor",
+            "initializer"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 14] How is a class typically split across files?",
+        options: [
+            "Class in .cpp only",
+            "Class in main.cpp",
+            "Declaration in .h, definition in .cpp",
+            "Entire class inside a namespace"
+        ],
+        answer: 2
+    },
+    {
+        question: "[Chapter 14] Which special function is used to make a copy of an object?",
+        options: [
+            "copy constructor",
+            "initializer",
+            "mutator",
+            "duplicate()"
+        ],
+        answer: 0
+    },
+    {
+        question: "[Chapter 14] What happens if you do NOT define a constructor?",
+        options: [
+            "The class becomes invalid",
+            "The compiler creates a default constructor",
+            "Objects cannot be created",
+            "All data members become private"
+        ],
+        answer: 1
+    },
+    {
+        question: "[Chapter 14] Which of the following correctly creates an object?",
+        options: [
+            "class Car();",
+            "Car myCar;",
+            "Car = new Car();",
+            "new Car myCar;"
+        ],
+        answer: 1
+    },
 
   // ---------------- TYPE OF ERRORS ----------------
-  {
-    question: "[Type of Error] What type of error occurs when the compiler detects invalid syntax?",
-    options: [
-      "Runtime error",
-      "Logic error",
-      "Syntax error",
-      "Linker error"
-    ],
-    answer: 2
-  },
-  {
-    question: "[Type of Error] What type of error occurs when a program compiles but crashes during execution?",
-    options: [
-      "Syntax error",
-      "Runtime error",
-      "Logic error",
-      "Compilation error"
-    ],
-    answer: 1
-  },
-  {
-    question: "[Type of Error] Which type of error occurs when the program runs but produces incorrect output?",
-    options: [
-      "Logic error",
-      "Syntax error",
-      "Runtime error",
-      "Linker error"
-    ],
-    answer: 0
-  },
-  {
-    question: "[Type of Error] What kind of error is caused by dividing by zero at runtime?",
-    options: [
-      "Logic error",
-      "Syntax error",
-      "Runtime error",
-      "Compile-time warning"
-    ],
-    answer: 2
-  },
-  {
-    question: "[Type of Error] Forgetting a semicolon at the end of a statement will produce what type of error?",
-    options: [
-      "Logic error",
-      "Syntax error",
-      "Runtime error",
-      "Memory error"
-    ],
-    answer: 1
-  },
-  {
-    question: "[Type of Error] Using an uninitialized variable may result in what type of error?",
-    options: [
-      "Syntax error",
-      "Logic error",
-      "Runtime error",
-      "Compilation error"
-    ],
-    answer: 2
-  },
-  {
-    question: "[Type of Error] Using the wrong operator in a condition (e.g., = instead of ==) is classified as what type of error?",
-    options: [
-      "Syntax error",
-      "Logic error",
-      "Runtime error",
-      "Linker error"
-    ],
-    answer: 1
-  },
-  {
-    question: "[Type of Error] A program that references a variable outside its scope will cause what type of error?",
-    options: [
-      "Logic error",
-      "Runtime error",
-      "Syntax error",
-      "Memory leak"
-    ],
-    answer: 2
-  },
-  {
-    question: "[Type of Error] Accessing an array element out of bounds is considered which type of error?",
-    options: [
-      "Syntax error",
-      "Logic error",
-      "Runtime error",
-      "Compile-time error"
-    ],
-    answer: 2
-  },
-  {
-    question: "[Type of Error] Forgetting to include a required header file can result in what type of error?",
-    options: [
-      "Syntax error",
-      "Linker or compile-time error",
-      "Runtime error",
-      "Logic error"
-    ],
-    answer: 1
-  }
+      {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nint x = 'hello';\nC",
+        options: ["Syntax error", "Logic error", "Runtime error", "Compile-time error"],
+        answer: 3
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\ncout << \"Value: \" << value\nC",
+        options: ["Syntax error", "Runtime error", "Logic error", "No error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nint x = 10 / 0;\nC",
+        options: ["Runtime error", "Compile-time error", "Logic error", "Syntax error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nif (value = 5) { }\nC",
+        options: ["Logic error", "Syntax error", "Runtime error", "Compile-time error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nint numbers[3];\nnumbers[5] = 10;\nC",
+        options: ["Logic error", "Syntax error", "Runtime error", "Compile-time error"],
+        answer: 2
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nstring name;\ncin >> nam;\nC",
+        options: ["Compile-time error", "Runtime error", "Logic error", "Syntax error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nfor (int i=0; i<=5; i++) { total += values[i]; }\nC",
+        options: ["Logic error", "Syntax error", "Runtime error", "Compile-time error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\ncout << \"Hello\"\nC",
+        options: ["Syntax error", "Runtime error", "Logic error", "None"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nint x; cout << x;\nC",
+        options: ["Runtime error", "Logic error", "Compile-time error", "Syntax error"],
+        answer: 1
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nwhile(true) { }\nC",
+        options: ["Logic error", "Runtime error", "Syntax error", "Compile-time error"],
+        answer: 1
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\ndouble result = sqrt(-25);\nC",
+        options: ["Logic error", "Runtime error", "Syntax error", "Compile-time error"],
+        answer: 1
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nint x = 10;\nif (x > 5) cout << \"low\";\nC",
+        options: ["Logic error", "Syntax error", "Compile-time error", "Runtime error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\ncout << \"Test\" << endl))\nC",
+        options: ["Syntax error", "Runtime error", "Logic error", "None"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\ndouble price = \"nine\";\nC",
+        options: ["Compile-time error", "Logic error", "Syntax error", "Runtime error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nint x = 2;\nint y = x / (x - 2);\nC",
+        options: ["Logic error", "Runtime error", "Syntax error", "Compile-time error"],
+        answer: 1
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nfloat x = 0.1 + 0.2;\nif (x == 0.3) {}\nC",
+        options: ["Logic error", "Runtime error", "Compile-time error", "Syntax error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nstring input;\ncin >> input;\nint num = stoi(input);\nC",
+        options: ["Runtime error", "Logic error", "Syntax error", "Compile-time error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nint main( { return 0; }\nC",
+        options: ["Syntax error", "Runtime error", "Logic error", "Compile-time error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nint age;\ncout << \"Age: \" << age;\nC",
+        options: ["Logic error", "Compile-time error", "Runtime error", "Syntax error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nint* p = nullptr;\n*p = 10;\nC",
+        options: ["Runtime error", "Compile-time error", "Logic error", "Syntax error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nif (x > 0);\n{ cout << x; }\nC",
+        options: ["Logic error", "Syntax error", "Compile-time error", "Runtime error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nfor i in range(5):\nC",
+        options: ["Syntax error", "Logic error", "Runtime error", "Compile-time error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nint x = \"5\" + 3;\nC",
+        options: ["Compile-time error", "Logic error", "Runtime error", "Syntax error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nint nums[2] = {1,2,3};\nC",
+        options: ["Compile-time error", "Logic error", "Runtime error", "Syntax error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nwhile(x = 5) { }\nC",
+        options: ["Logic error", "Syntax error", "Compile-time error", "Runtime error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\ncout << \"Result: \" << (5/2) << endl;\nC",
+        options: ["Logic error", "Runtime error", "Compile-time error", "Syntax error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nint arr[3];\ncout << arr[100];\nC",
+        options: ["Runtime error", "Logic error", "Syntax error", "Compile-time error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nif (true)\n    cout << \"Hi\"\nelse\n    cout << \"Bye\";\nC",
+        options: ["Syntax error", "Logic error", "Compile-time error", "Runtime error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\ndouble d = sqrt('a');\nC",
+        options: ["Compile-time error", "Runtime error", "Logic error", "Syntax error"],
+        answer: 0
+    },
+    {
+        question: "[Chapter Type of Error] What type of error is shown?\n\nint num = stoi(\"xyz\");\nC",
+        options: ["Runtime error", "Logic error", "Syntax error", "Compile-time error"],
+        answer: 0
+    }
 ];
 
 
@@ -880,87 +1745,73 @@ playerInput.addEventListener("input", () => {
 
 let playerName = "";
 
+// --------------------------------------------------
+// START BUTTON (modified to include chapter selection)
+// --------------------------------------------------
 startBtn.onclick = () => {
-  let name = playerInput.value.trim();
-  const lowerName = name.toLowerCase();
+let name = playerInput.value.trim();
+const lowerName = name.toLowerCase();
 
-  if (name === "") {
-    alert("Please enter your name to begin.");
-    return;
-  }
 
-  // ✅ Strict Owen format enforcement
-  if (
-    lowerName.includes("owen") &&
-    name !== "Owen (With Hat)" &&
-    name !== "Owen (Without Hat)"
-  ) {
-    alert("Please specify: Owen (With Hat) or Owen (Without Hat)");
-    return;
-  }
-
-  // ✅ Emma / Emmalyssa becomes darling <3
-  if (lowerName === "emma" || lowerName === "emmalyssa") {
-    name = "darling <3";
-  }
-
-   if (lowerName === "murad") {
-    name = "Murad (where is burd 2?)";
-  }
-
-    if (lowerName === "matthew" || lowerName === "augoboss") {
-    name = "Let's Do Pumpkin";
-  }
-
-    if (lowerName === "aiden" || lowerName === "darkness") {
-    name = "Little Cheese IV";
-  }
-
-    if (lowerName === "remy") {
-    name = "Remy (Pool master)";
-  }
-
-      if (lowerName === "cole") {
-    name = "My Friend Cole";
-  }
-
-  if (lowerName === "jamari" || lowerName === "bread and jam" || lowerName === "breadnjam") {
-  name = "You should know your own name...";
-}
-
-// ✅ Blocked names: Blanc, Saeed, Sergio, Sultan
-if (
-  ["blanc", "saeed", "sergio", "sultan", "mccully", "harry", "test", "fuck you", "bitch", "alyssa sucks", "allie sucks"].includes(lowerName)
-) {
-  alert("Access denied.");
-  window.close(); // May not work in all browsers unless opened via script
-  window.location.href = "https://www.google.com"; // Fallback redirect
-  return;
+if (name === "") {
+alert("Please enter your name to begin.");
+return;
 }
 
 
+// Your original name rules preserved 100%
+if (lowerName.includes("owen") && name !== "Owen (With Hat)" && name !== "Owen (Without Hat)") {
+alert("Please specify: Owen (With Hat) or Owen (Without Hat)");
+return;
+}
+if (["emma", "emmalyssa"].includes(lowerName)) name = "darling <3";
+if (lowerName === "murad") name = "Murad (where is burd 2?)";
+if (["matthew", "augoboss"].includes(lowerName)) name = "Let's Do Pumpkin";
+if (["aiden", "darkness"].includes(lowerName)) name = "Little Cheese IV";
+if (lowerName === "remy") name = "Remy (Pool master)";
+if (lowerName === "cole") name = "My Friend Cole";
+if (["jamari", "bread and jam", "breadnjam"].includes(lowerName)) name = "You should know your own name...";
 
 
+const blocked = ["blanc", "saeed", "sergio", "sultan", "mccully", "harry", "test", "fuck you", "bitch", "alyssa sucks", "allie sucks"];
+if (blocked.includes(lowerName)) {
+alert("Access denied.");
+window.location.href = "https://www.google.com";
+return;
+}
 
 
+playerName = name;
+playerDisplay.textContent = `Player: ${playerName}`;
+playerDisplay.classList.remove("hidden");
 
 
+startScreen.classList.add("hidden");
+quizBox.classList.remove("hidden");
 
 
-  playerName = name;
-  playerDisplay.textContent = `Player: ${playerName}`;
-  playerDisplay.classList.remove("hidden");
+basicMode = basicModeToggle.checked;
 
-  startScreen.classList.add("hidden");
-  quizBox.classList.remove("hidden");
 
-  totalQuestions = parseInt(questionCountSelect.value);
-  selectedQuestions = questionPool.sort(() => 0.5 - Math.random()).slice(0, totalQuestions);
-  basicMode = basicModeToggle.checked;
+// ------------ MODE HANDLING ------------
+if (modeSelect.value === "chapter") {
+const chap = chapterSelect.value;
+selectedQuestions = questionPool.filter(q => q.question.includes(`[Chapter ${chap}]`));
+totalQuestions = selectedQuestions.length;
+} else {
+totalQuestions = parseInt(questionCountSelect.value);
+selectedQuestions = questionPool.sort(() => 0.5 - Math.random()).slice(0, totalQuestions);
+}
 
-  showQuestion();
+
+current = 0;
+score = 0;
+questionsCompleted = 0;
+timeLeft = 60;
+
+
+showQuestion();
 };
-
 
 
 
@@ -1027,7 +1878,26 @@ nextBtn.onclick = () => {
 
 function showQuestion() {
   const q = selectedQuestions[current];
-  questionEl.textContent = `Q${current + 1}: ${q.question}`;
+
+  let questionText = q.question;
+
+// If question ends with "C", treat everything after two linebreaks as code
+if (questionText.endsWith("C")) {
+    questionText = questionText.slice(0, -1); // remove the 'C' marker
+
+    // Split text: before code vs code block
+    const parts = questionText.split(/\n\s*\n/); // detect blank line separating text/code
+    const intro = parts[0];
+    const codeBlock = parts.slice(1).join("\n\n");
+
+    questionEl.innerHTML =
+        `Q${current + 1}: ${intro}<pre><code>${codeBlock}</code></pre>`;
+} else {
+    // Normal (non-code) display
+    questionEl.textContent = `Q${current + 1}: ${q.question}`;
+}
+
+
   questionNumberEl.textContent = `Question ${current + 1} / ${totalQuestions}`;
   optionsEl.innerHTML = "";
   nextBtn.style.display = "none";
